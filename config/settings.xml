@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<!--information of the default settings of the aplication-->
+
+<data>
+    <DB_host>localhost</DB_host>
+    <DB_user>root</DB_user>
+    <DB_password>123456789</DB_password>
+    <DB>HOSTPOT</DB>
+</data>

@@ -1,8 +1,12 @@
 from flask import *
 from flask_cors import *
+from database.database import *
+from config.config import xml
+from estadistics.estadistics import calcule
 
 server = Flask('server')
 cors = CORS(server)
+db = DataBase(xml())
 
 #Home route
 @server.route('/home',methods=['GET'])
@@ -41,9 +45,16 @@ def admin_l ():
 
 
 #Api route
-@server.route('/act_add',methods=['POST'])
+@server.route('/api/add',methods=['POST'])
 def actividty_add():
-    #add code to database
-    return {'id':request.get_json()}
+    rq = request.get_json()
+    context= db.datainsert(db.querys(rq))
+    return {'id':request.get_json(),'status':context}
+
+@server.route('/api/estadistics',methods=['POST'])
+def estadistics_calcule():
+    rq = request.get_json()
+    context= calcule(rq,db)
+    return {'id':request.get_json(),'status':context}
 
 server.run(debug=True, host='192.168.2.252')
