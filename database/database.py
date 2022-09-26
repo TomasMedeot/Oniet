@@ -36,6 +36,12 @@ class DataBase:
             month = now.month
             year = now.year
             return f"insert into ACTIVITY(NAME,MAIL,SEX,HOUR,DAY,MONTH,YEAR) values ('{data['name']}','{data['email']}','{data['sex']}',{hour},{day},{month},{year});"
+        if data['action']=='add_host_activity':
+            hour = now.hour
+            day = now.day
+            month = now.month
+            year = now.year
+            return f"insert into ACTIVITY_HOSTPOT(HOUR,DAY,MONTH,YEAR) values ({hour},{day},{month},{year});"
         elif data['action']=='read_by_year':
             return f"select * from ACTIVITY where YEAR = {data['year']};"
         elif data['action']=='read_by_month':
@@ -44,7 +50,16 @@ class DataBase:
             return f"select * from ACTIVITY where DAY = {data['day']} and month = {data['month']} and year = {data['year']};"
         elif data['action']=='read_sex':
             return f"select * from ACTIVITY;"
-
-
-
+        elif data['action']=='read_host_by_year':
+            return f"select * from ACTIVITY_HOSTPOT where YEAR = {data['year']};"
+        elif data['action']=='read_host_by_month':
+            return f"select * from ACTIVITY_HOSTPOT where MONTH = {data['month']} and year = {data['year']};"
+        elif data['action']=='read_host_by_day':
+            return f"select * from ACTIVITY_HOSTPOT where DAY = {data['day']} and month = {data['month']} and year = {data['year']};"
+        elif data['action']=='read_user':
+            return f"select * from ADMIN where MAIL like '{data['email']}';"
+        elif data['action']=='add_user':
+            return f"insert into ADMIN(MAIL,PASSWORD,NAME) values ('{data['email']}','{data['password']}','{data['name']}');"
+        elif data['action']=='update_user':
+            return f"update ADMIN set PASSWORD = '{data['password']}' where mail like '{data['email']}';"
         #insert into ACTIVITY(NAME,MAIL,SEX,HOUR,DAY,MONTH,YEAR) values ('tomas','tomimedeot@gmail.com','hombre',,,,);
