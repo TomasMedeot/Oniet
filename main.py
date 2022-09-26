@@ -18,6 +18,21 @@ def home ():
     db.datainsert(db.querys({'action':'add_host_activity'}))
     return render_template('home.html')
 
+#Stats route
+@server.route('/stats',methods=['GET'])
+def stats ():
+    return render_template('stats.html')
+
+#Config route
+@server.route('/config',methods=['GET'])
+def config ():
+    return render_template('config.html')
+
+#Login route
+@server.route('/login',methods=['GET'])
+def login ():
+    return render_template('login.html')
+
 #Admin route
 @server.route('/admin',methods=['GET','POST'])
 def admin ():
