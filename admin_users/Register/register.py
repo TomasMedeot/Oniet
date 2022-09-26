@@ -3,7 +3,6 @@ from admin_users.Mail.mail import sendmail
 
 def register(data,database):
     data['action']='add_user'
-    print(data)
     request=database.datainsert(database.querys(data))
     return request
 
