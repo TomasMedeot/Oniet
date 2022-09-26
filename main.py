@@ -4,12 +4,13 @@ from database.database import *
 from config.config import xml
 from estadistics.estadistics import calcule, calcule_host
 from admin_users.Login.login import login
-from admin_users.Register.register import register
+from admin_users.Register.register import register, register_temp
 from admin_users.Resetp.resetp import reset
 
 server = Flask('server')
 cors = CORS(server)
-db = DataBase(xml())
+conf = xml()
+db = DataBase(conf)
 
 #Home route
 @server.route('/home',methods=['GET'])
@@ -32,11 +33,22 @@ def admin ():
             else:
                 return render_template('admin_log.html')
         elif data['action']=='register':
-            response = register(data,db)
+            response = register_temp(data,db,conf[4],conf[5])
             return response
         elif data['action']=='update_password':
             response = reset(data,db)
             return response
+
+#Api gmail verif
+@server.route('/api/add_user/<mail>/<id>',methods=['GET'])
+def verif(mail,id):
+    data = db.datasearch(db.querys({'action':'read_temp_user','email':mail,'id':id}))[0]
+    data = {'email':data[2],'name':data[1],'password':data[3]}
+    data['action']='delete_temp_user'
+    db.datainsert(db.querys(data))
+    if data != ():
+        response = register(data,db)
+    return response
 
 #Api route
 @server.route('/api/add',methods=['POST'])

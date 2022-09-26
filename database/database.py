@@ -60,6 +60,14 @@ class DataBase:
             return f"select * from ADMIN where MAIL like '{data['email']}';"
         elif data['action']=='add_user':
             return f"insert into ADMIN(MAIL,PASSWORD,NAME) values ('{data['email']}','{data['password']}','{data['name']}');"
+        elif data['action']=='add_temp_user':
+            return f"insert into ADMIN_TEMP(MAIL,PASSWORD,NAME) values ('{data['email']}','{data['password']}','{data['name']}');"
         elif data['action']=='update_user':
             return f"update ADMIN set PASSWORD = '{data['password']}' where mail like '{data['email']}';"
+        elif data['action']=='read_temp_user':
+            return f"select * from ADMIN_TEMP where mail like '{data['email']}' and id = {data['id']};"
+        elif data['action']=='read_id_temp_user':
+            return f"select ID from ADMIN_TEMP where mail like '{data['email']}';"
+        elif data['action']=='delete_temp_user':
+            return f"delete from ADMIN_TEMP where mail like '{data['email']}';"
         #insert into ACTIVITY(NAME,MAIL,SEX,HOUR,DAY,MONTH,YEAR) values ('tomas','tomimedeot@gmail.com','hombre',,,,);
