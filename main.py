@@ -9,6 +9,21 @@ cors = CORS(server)
 def home ():
     return render_template('home.html')
 
+#Stats route
+@server.route('/stats',methods=['GET'])
+def stats ():
+    return render_template('stats.html')
+
+#Config route
+@server.route('/config',methods=['GET'])
+def config ():
+    return render_template('config.html')
+
+#Login route
+@server.route('/login',methods=['GET'])
+def login ():
+    return render_template('login.html')
+
 @server.route('/admin',methods=['GET','POST'])
 def admin():
     if request.method == 'GET':
@@ -46,4 +61,4 @@ def actividty_add():
     #add code to database
     return {'id':request.get_json()}
 
-server.run(debug=True, host='192.168.2.252')
+server.run(debug=True, host='192.168.137.138')
