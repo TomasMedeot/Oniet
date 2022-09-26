@@ -28,11 +28,6 @@ def stats ():
 def config ():
     return render_template('config.html')
 
-#Login route
-@server.route('/login',methods=['GET'])
-def login ():
-    return render_template('login.html')
-
 #Admin route
 @server.route('/admin',methods=['GET','POST'])
 def admin ():
@@ -44,9 +39,9 @@ def admin ():
         if data['action']=='login':
             response = login(data,db)
             if response != None:
-                return render_template('admin.html')
+                return render_template('home.html')
             else:
-                return render_template('admin_log.html')
+                return render_template('login.html')
         elif data['action']=='register':
             response = register_temp(data,db,conf[4],conf[5])
             return response
@@ -63,7 +58,7 @@ def verif(mail,id):
     db.datainsert(db.querys(data))
     if data != ():
         response = register(data,db)
-    return response
+        return redirect('/admin')
 
 #Api route
 @server.route('/api/add',methods=['POST'])
