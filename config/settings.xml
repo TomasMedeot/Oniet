@@ -5,6 +5,6 @@
 <data>
     <DB_host>localhost</DB_host>
     <DB_user>root</DB_user>
-    <DB_password>123456789</DB_password>
-    <DB>HOSTPOT</DB>
+    <DB_password>password</DB_password>
+    <DB>HOTSPOT</DB>
 </data>
