@@ -102,5 +102,5 @@ def estadistics_host_calcule():
 
 
 if __name__ == '__main__':
-    #server.run(debug=True, host='localhost')
-    server.run(debug=True, host='192.168.2.252')
+    server.run(debug=True, host='localhost')
+    # server.run(debug=True, host='192.168.2.252')
