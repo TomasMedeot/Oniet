@@ -24,13 +24,15 @@
             <h2>Login</h2>
             <form>
                 <div class="mb-3">
+                    <div id="email-required" class="text-danger">Requerido</div>
                     <label for="login__email-input" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="login__email-input" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" id="login__email-input" aria-describedby="emailHelp" required>
                     <div id="emailHelp" class="form-text">Nunca compartiremos tu email con nadie más.</div>
                 </div>
                 <div class="mb-3">
+                    <div id="pass-required" class="text-danger">Requerido</div>
                     <label for="login__pass-input" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" id="login__pass-input">
+                    <input type="password" class="form-control" id="login__pass-input" required>
                 </div>
                 <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="remember-user">
