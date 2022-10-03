@@ -40,10 +40,6 @@ CREATE TABLE ACTIVITY_HOTSPOT(
 	primary key (ID));
 
 
-INSERT INTO ADMIN(NAME, MAIL, PASSWORD) VALUES('Tomas', 'tomicaceres07@gmail.com', '1234567');
-INSERT INTO ADMIN(NAME, MAIL, PASSWORD) VALUES('Tomaaa', 'tomicaceres08@gmail.com', '12345679');
-INSERT INTO ADMIN(NAME, MAIL, PASSWORD) VALUES('Tomassss', 'tomicaceres09@gmail.com', '123456788');
-
 INSERT INTO ACTIVITY(NAME, MAIL, SEX, HOUR, DAY, MONTH, YEAR) VALUES('TOMEE', 'tomicacer09@gmail.com', 'hombre', 23, 1, 2, 2020);
 INSERT INTO ACTIVITY(NAME, MAIL, SEX, HOUR, DAY, MONTH, YEAR) VALUES('TOMESSSE', 'tomicacerEE09@gmail.com', 'mujer', 22, 2, 3, 2020);
 INSERT INTO ACTIVITY(NAME, MAIL, SEX, HOUR, DAY, MONTH, YEAR) VALUES('sofi', 'sofiiii@gmail.com', 'mujer', 10, 3, 4, 2020);

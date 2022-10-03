@@ -28,11 +28,17 @@ def stats ():
 def config ():
     return render_template('config.html')
 
+#Config route
+@server.route('/register',methods=['GET'])
+# TODO: change name of function
+def registro ():
+    return render_template('register.html')
+
 #Admin route
 @server.route('/admin',methods=['GET','POST'])
 def admin ():
     if request.method == 'GET':
-        return render_template('admin_log.html')
+        return render_template('login.html')
 
     if request.method == 'POST':
         data = request.get_json()
