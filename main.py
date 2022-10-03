@@ -53,7 +53,6 @@ def admin ():
                 return render_template('admin.html')
             else:
                 return render_template('login.html')
-        '''
         #revise 
         elif data['action']=='register':
             response = register_temp(data,db,conf[4],conf[5])
@@ -61,9 +60,8 @@ def admin ():
         elif data['action']=='update_password':
             response = reset(data,db)
             return response
-        '''
 
-'''
+
 #Api gmail verif
 @server.route('/api/add_user/<mail>/<id>',methods=['GET'])
 def verif(mail,id):
@@ -76,7 +74,6 @@ def verif(mail,id):
         return redirect('/admin')
     else:
         return redirect('/admin')
-'''
 
 #Api route
 @server.route('/api/add',methods=['POST'])
