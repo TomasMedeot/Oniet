@@ -39,7 +39,6 @@ CREATE TABLE ACTIVITY_HOTSPOT(
     YEAR int NOT NULL,
 	primary key (ID));
 
-
 INSERT INTO ACTIVITY(NAME, MAIL, SEX, HOUR, DAY, MONTH, YEAR) VALUES('TOMEE', 'tomicacer09@gmail.com', 'hombre', 23, 1, 2, 2020);
 INSERT INTO ACTIVITY(NAME, MAIL, SEX, HOUR, DAY, MONTH, YEAR) VALUES('TOMESSSE', 'tomicacerEE09@gmail.com', 'mujer', 22, 2, 3, 2020);
 INSERT INTO ACTIVITY(NAME, MAIL, SEX, HOUR, DAY, MONTH, YEAR) VALUES('sofi', 'sofiiii@gmail.com', 'mujer', 10, 3, 4, 2020);

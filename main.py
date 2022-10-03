@@ -13,7 +13,7 @@ conf = xml()
 db = DataBase(conf)
 
 #Home route
-@server.route('/home',methods=['GET'])
+@server.route('/',methods=['GET'])
 def home ():
     db.datainsert(db.querys({'action':'add_host_activity'}))
     return render_template('home.html')
@@ -45,7 +45,7 @@ def admin ():
         if data['action']=='login':
             response = login(data,db)
             if response != None:
-                return render_template('home.html')
+                return render_template('admin.html')
             else:
                 return render_template('login.html')
         elif data['action']=='register':
@@ -63,7 +63,9 @@ def verif(mail,id):
     data['action']='delete_temp_user'
     db.datainsert(db.querys(data))
     if data != ():
-        response = register(data,db)
+        register(data,db)
+        return redirect('/admin')
+    else:
         return redirect('/admin')
 
 #Api route
