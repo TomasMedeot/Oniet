@@ -12,8 +12,13 @@ cors = CORS(server)
 conf = xml()
 db = DataBase(conf)
 
-#Home route
+#default route
 @server.route('/',methods=['GET'])
+def default():
+    return redirect('/home')
+
+#Home route
+@server.route('/home',methods=['GET'])
 def home ():
     db.datainsert(db.querys({'action':'add_host_activity'}))
     return render_template('home.html')
@@ -48,13 +53,17 @@ def admin ():
                 return render_template('admin.html')
             else:
                 return render_template('login.html')
+        '''
+        #revise 
         elif data['action']=='register':
             response = register_temp(data,db,conf[4],conf[5])
             return response
         elif data['action']=='update_password':
             response = reset(data,db)
             return response
+        '''
 
+'''
 #Api gmail verif
 @server.route('/api/add_user/<mail>/<id>',methods=['GET'])
 def verif(mail,id):
@@ -67,20 +76,31 @@ def verif(mail,id):
         return redirect('/admin')
     else:
         return redirect('/admin')
+'''
 
 #Api route
 @server.route('/api/add',methods=['POST'])
 def actividty_add():
     rq = request.get_json()
+    rq['action']='add_activity'
     context= db.datainsert(db.querys(rq))
     return {'id':request.get_json(),'status':context}
 
-#Api stadistics
-@server.route('/api/estadistics',methods=['POST'])
+#Api general stadistics
+@server.route('/api/general/estadistics',methods=['POST'])
 def estadistics_calcule():
     rq = request.get_json()
     context= calcule(rq,db)
     return {'id':request.get_json(),'status':context}
 
+#Api host stadistics
+@server.route('/api/host/estadistics',methods=['POST'])
+def estadistics_host_calcule():
+    rq = request.get_json()
+    context= calcule_host(rq,db)
+    return {'id':request.get_json(),'status':context}
+
+
 if __name__ == '__main__':
-    server.run(debug=True, host='localhost')
+    #server.run(debug=True, host='localhost')
+    server.run(debug=True, host='192.168.2.252')
