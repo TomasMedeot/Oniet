@@ -6,7 +6,7 @@
     <DB_host>localhost</DB_host>
     <DB_user>root</DB_user>
     <DB_password>123456789</DB_password>
-    <DB>HOSTPOT</DB>
+    <DB>HOTSPOT</DB>
     <Mail_direction>asusgoverif@gmail.com</Mail_direction>
     <Aplication_mail_password>zmjhqeztigntcaoa</Aplication_mail_password>
 </data>
