@@ -1,3 +1,24 @@
-* {
-    background-color: red;
+
+
+/* Header */
+#home__header {
+    background-color: #212529;
+    color: white;
+}
+
+#home__logo {
+    background-color: white;
+    margin: 1em;
+    width: 10em;
+}
+
+/* Main */
+
+
+/* Footer */
+#home__footer__div {
+    background-color: #212529;
+    color: white;
+    padding: 2em;
+    text-align: center;
 }

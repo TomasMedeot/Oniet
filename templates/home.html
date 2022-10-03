@@ -1,11 +1,29 @@
-{% extends 'index.html' %} 
-{% block style %} <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" /> {% endblock %}
-
-{% block title %} Estadisticas {% endblock %}
-{% block content %}
-<main>
-    <div>
-        <h2>Home Screen</h2>
-    </div>
-</main>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.2.2/css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='bootstrap-5.2.2/js/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" />
+    <title>Home</title>
+</head>
+<body>
+    <header>
+        <div id="home__header">
+            <img id="home__logo" src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
+        </div>
+    </header>
+    <main id="home__main">
+        <div id="home__div">
+            <h2>home</h2>
+        </div>
+    </main>
+    <footer>
+        <div id="home__footer__div">
+            Desarrollado por Basa2 Team :).
+        </div>
+    </footer>
+</body>
+</html>

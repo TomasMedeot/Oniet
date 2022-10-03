@@ -1,3 +1,7 @@
+.show {
+    display: flex!important;
+}
+
 /* Header */
 #login__header {
     background-color: #212529;
@@ -22,6 +26,14 @@
     padding-bottom: 3em;
     padding-top: 3em;
     width: 40%;
+}
+
+#email-required {
+    display: none;
+}
+
+#pass-required {
+    display: none;
 }
 
 
