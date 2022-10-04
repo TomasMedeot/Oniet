@@ -1,135 +1,247 @@
-{% extends 'index.html' %} 
-{% block style %} <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" /> {% endblock %}
-{% block title %} Inicio {% endblock %}
-{% block content %}
-<main>
-    <div id="admin__div">
-        <h2>Hola, {usuario}</h2>
-        <h4 class="mt-4">Catálogo</h4>
-        <ul class="list-group">
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-10">
-                        Producto 1
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-primary mx-2">Editar</button>
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-danger mx-2">Borrar</button>
-                    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.2.2/css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='bootstrap-5.2.2/js/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stats.css') }}" />
+    <title id="login__title">Login Admin</title>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</head>
+<body>
+    <header id="login__header">
+        <div id="login__header-div">
+            <img id="login__logo" src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
+        </div>
+    </header>
+    <header id="admin__header">
+        <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img id="admin__logo" src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-5 mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <button id="admin__button-catalogo" class="btn btn-outline-light mx-4" aria-current="page">Catálogo</button>
+                        </li>
+                        <li class="nav-item">
+                            <button id="admin__button-estadisticas" class="btn btn-outline-light mx-4" aria-current="page">Estadísticas</button>
+                        </li>
+                    </ul>
                 </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-10">
-                        Producto 2
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-primary mx-2">Editar</button>
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-danger mx-2">Borrar</button>
-                    </div>
+            </div>
+        </nav>
+    </header>
+    <main id="register__main">
+        <div id="register__div">
+            <h2>Registro</h2>
+            <form>
+                <div class="mb-3">
+                    <label for="register__name-input" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="register__name-input" aria-describedby="emailHelp" required>
                 </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-10">
-                        Producto 3
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-primary mx-2">Editar</button>
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-danger mx-2">Borrar</button>
-                    </div>
+                <div class="mb-3">
+                    <label for="register__email-input" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="register__email-input" aria-describedby="emailHelp" required>
+                    <div id="emailHelp" class="form-text">Nunca compartiremos tu email con nadie más.</div>
                 </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-10">
-                        Producto 4
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-primary mx-2">Editar</button>
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-danger mx-2">Borrar</button>
-                    </div>
+                <div class="mb-3">
+                    <label for="register__pass-input" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="register__pass-input" required maxlength="10">
                 </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-10">
-                        Producto 5
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-primary mx-2">Editar</button>
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-danger mx-2">Borrar</button>
-                    </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="register__remember-user">
+                    <label class="form-check-label" for="register__remember-user">Recordar usuario</label>
                 </div>
-            </li>
-        </ul>
-        <button class="btn btn-success mt-3">Agregar</button>
-        <h4 class="mt-4">Usuarios</h4>
-        <ul class="list-group">
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-10">
-                        An item
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-primary mx-2">Editar</button>
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-danger mx-2">Borrar</button>
-                    </div>
+                <button type="submit" class="btn btn-primary" id="register__button-submit">Entrar</button> 
+                <br>
+                <div>
+                    <span>Ya tenes una cuenta? </span><button id="register__button-login" class="btn btn-outline-dark">Ingresa ahora</button>
                 </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-10">
-                        An item
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-primary mx-2">Editar</button>
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-danger mx-2">Borrar</button>
-                    </div>
+            </form>
+        </div>
+    </main>
+    <main id="login__main">
+        <div id="login__div">
+            <h2>Login</h2>
+            <form>
+                <div class="mb-3">
+                    <div id="email-required" class="text-danger">Requerido</div>
+                    <label for="login__email-input" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="login__email-input" aria-describedby="emailHelp" required>
+                    <div id="emailHelp" class="form-text">Nunca compartiremos tu email con nadie más.</div>
                 </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-10">
-                        An item
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-primary mx-2">Editar</button>
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-danger mx-2">Borrar</button>
-                    </div>
+                <div class="mb-3">
+                    <div id="pass-required" class="text-danger">Requerido</div>
+                    <label for="login__pass-input" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="login__pass-input" required>
                 </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-10">
-                        An item
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-primary mx-2">Editar</button>
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-danger mx-2">Borrar</button>
-                    </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="login__remember-user">
+                    <label class="form-check-label" for="login__remember-user">Recordar usuario</label>
                 </div>
-            </li>
-        </ul>
-        <button class="btn btn-success mt-3">Agregar</button>
-    </div>
-</main>
-{% endblock %}
+                <button type="submit" class="btn btn-primary" id="login__button-submit">Entrar</button> 
+                <br>
+                <div>
+                    <span>No tenes una cuenta? </span><button id="login__button-register" class="btn btn-outline-dark">Registrate ahora</button>
+                </div>
+                <!-- <div>No tenes una cuenta? <a href="/register">Registrate ahora</a></div> -->
+            </form>
+        </div>
+    </main>
+    <main id="admin__main">
+        <div id="admin__div">
+            <h2>Hola, {usuario}</h2>
+            <h4 class="mt-4">Catálogo</h4>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-10">
+                            Producto 1
+                        </div>
+                        <div class="col-1">
+                            <button class="btn btn-primary mx-2">Editar</button>
+                        </div>
+                        <div class="col-1">
+                            <button class="btn btn-danger mx-2">Borrar</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-10">
+                            Producto 2
+                        </div>
+                        <div class="col-1">
+                            <button class="btn btn-primary mx-2">Editar</button>
+                        </div>
+                        <div class="col-1">
+                            <button class="btn btn-danger mx-2">Borrar</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-10">
+                            Producto 3
+                        </div>
+                        <div class="col-1">
+                            <button class="btn btn-primary mx-2">Editar</button>
+                        </div>
+                        <div class="col-1">
+                            <button class="btn btn-danger mx-2">Borrar</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-10">
+                            Producto 4
+                        </div>
+                        <div class="col-1">
+                            <button class="btn btn-primary mx-2">Editar</button>
+                        </div>
+                        <div class="col-1">
+                            <button class="btn btn-danger mx-2">Borrar</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-10">
+                            Producto 5
+                        </div>
+                        <div class="col-1">
+                            <button class="btn btn-primary mx-2">Editar</button>
+                        </div>
+                        <div class="col-1">
+                            <button class="btn btn-danger mx-2">Borrar</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <button class="btn btn-success mt-3">Agregar</button>
+            <h4 class="mt-4">Usuarios</h4>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-10">
+                            An item
+                        </div>
+                        <div class="col-1">
+                            <button class="btn btn-primary mx-2">Editar</button>
+                        </div>
+                        <div class="col-1">
+                            <button class="btn btn-danger mx-2">Borrar</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-10">
+                            An item
+                        </div>
+                        <div class="col-1">
+                            <button class="btn btn-primary mx-2">Editar</button>
+                        </div>
+                        <div class="col-1">
+                            <button class="btn btn-danger mx-2">Borrar</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-10">
+                            An item
+                        </div>
+                        <div class="col-1">
+                            <button class="btn btn-primary mx-2">Editar</button>
+                        </div>
+                        <div class="col-1">
+                            <button class="btn btn-danger mx-2">Borrar</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-10">
+                            An item
+                        </div>
+                        <div class="col-1">
+                            <button class="btn btn-primary mx-2">Editar</button>
+                        </div>
+                        <div class="col-1">
+                            <button class="btn btn-danger mx-2">Borrar</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <button class="btn btn-success mt-3">Agregar</button>
+        </div>
+    </main>
+    <main id="admin__stats">
+        <div>
+            <h2>Hola, {usuario}</h2>
+            <h4 class="mt-4">Stats</h4>
+        </div>
+    </main>
+    <footer>
+        <div id="login__footer__div">
+            Desarrollado por Basa2 Team :).
+        </div>
+    </footer>
+</body>
+</html>

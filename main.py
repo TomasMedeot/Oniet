@@ -52,7 +52,7 @@ def admin ():
             if response != None:
                 return render_template('admin.html')
             else:
-                return render_template('login.html')
+                return{'loged':'True'}
         #revise 
         elif data['action']=='register':
             response = register_temp(data,db,conf[4],conf[5])
@@ -99,5 +99,5 @@ def estadistics_host_calcule():
 
 
 if __name__ == '__main__':
-    # server.run(debug=True, host='localhost')
-    server.run(debug=True, host='192.168.2.252')
+    server.run(debug=True, host='192.168.60.16')
+    # server.run(debug=True, host='192.168.2.252')
