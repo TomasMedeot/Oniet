@@ -35,7 +35,6 @@ def config ():
 
 #Config route
 @server.route('/register',methods=['GET'])
-# TODO: change name of function
 def registro ():
     return render_template('register.html')
 
@@ -43,24 +42,22 @@ def registro ():
 @server.route('/admin',methods=['GET','POST'])
 def admin ():
     if request.method == 'GET':
+        print(request.form)
         return render_template('login.html')
-
+        
     if request.method == 'POST':
+        print(request.form)
+        print(request.get_json())
         data = request.get_json()
         if data['action']=='login':
             response = login(data,db)
             if response != None:
-                return render_template('admin.html')
+                return {'logged':True,'user':response}
             else:
-                return render_template('login.html')
-        #revise 
+                return {'logged':False}
         elif data['action']=='register':
             response = register_temp(data,db,conf[4],conf[5])
             return response
-        elif data['action']=='update_password':
-            response = reset(data,db)
-            return response
-
 
 #Api gmail verif
 @server.route('/api/add_user/<mail>/<id>',methods=['GET'])
@@ -99,5 +96,5 @@ def estadistics_host_calcule():
 
 
 if __name__ == '__main__':
-    # server.run(debug=True, host='localhost')
-    server.run(debug=True, host='192.168.2.252')
+    server.run(debug=True, host='192.168.60.12')
+    #server.run(debug=True, host='localhost')
