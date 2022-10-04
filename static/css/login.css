@@ -1,9 +1,13 @@
 .show {
-    display: flex!important;
+    display: block!important;
+}
+
+.hidden {
+    display: none!important;
 }
 
 /* Header */
-#login__header {
+#login__header-div {
     background-color: #212529;
     color: white;
 }
