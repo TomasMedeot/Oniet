@@ -23,31 +23,13 @@ def home ():
     db.datainsert(db.querys({'action':'add_host_activity'}))
     return render_template('home.html')
 
-#Stats route
-@server.route('/stats',methods=['GET'])
-def stats ():
-    return render_template('stats.html')
-
-#Config route
-@server.route('/config',methods=['GET'])
-def config ():
-    return render_template('config.html')
-
-#Config route
-@server.route('/register',methods=['GET'])
-def registro ():
-    return render_template('register.html')
-
 #Admin route
 @server.route('/admin',methods=['GET','POST'])
 def admin ():
     if request.method == 'GET':
-        print(request.form)
         return render_template('login.html')
         
     if request.method == 'POST':
-        print(request.form)
-        print(request.get_json())
         data = request.get_json()
         if data['action']=='login':
             response = login(data,db)
@@ -72,7 +54,7 @@ def verif(mail,id):
     else:
         return redirect('/admin')
 
-#Api route
+#Api activity
 @server.route('/api/add',methods=['POST'])
 def actividty_add():
     rq = request.get_json()
@@ -93,6 +75,28 @@ def estadistics_host_calcule():
     rq = request.get_json()
     context= calcule_host(rq,db)
     return {'id':request.get_json(),'status':context}
+
+#Api catalog
+@server.route('/api/catalog',methods=['GET','POST'])
+def catalog ():
+    if request.method == 'GET':
+        response =[]
+        cat = db.datasearch(db.querys({'action':'read_catalog'}))
+        if cat != ():
+            for i in cat:
+                response.append({'id':i[0],'price':i[1],'name':i[2],'description':i[3]})
+        return {'catalog':response}
+
+    elif request.method == 'POST':
+        data = request.get_json()
+        if data['action']=='add':
+            data['action']='add_catalog'
+            response =db.datainsert(db.querys(data))
+            return {'status':response}
+        if data['action']=='delete':
+            data['action']='delete_catalog'
+            response =db.datainsert(db.querys(data))
+            return {'status':response}
 
 
 if __name__ == '__main__':
