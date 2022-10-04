@@ -23,44 +23,23 @@ def home ():
     db.datainsert(db.querys({'action':'add_host_activity'}))
     return render_template('home.html')
 
-#Stats route
-@server.route('/stats',methods=['GET'])
-def stats ():
-    return render_template('stats.html')
-
-#Config route
-@server.route('/config',methods=['GET'])
-def config ():
-    return render_template('config.html')
-
-#Config route
-@server.route('/register',methods=['GET'])
-# TODO: change name of function
-def registro ():
-    return render_template('register.html')
-
 #Admin route
 @server.route('/admin',methods=['GET','POST'])
 def admin ():
     if request.method == 'GET':
-        return render_template('login.html')
-
+        return render_template('admin.html')
+        
     if request.method == 'POST':
         data = request.get_json()
         if data['action']=='login':
             response = login(data,db)
             if response != None:
-                return render_template('admin.html')
+                return {'logged':True,'user':response}
             else:
-                return{'loged':'True'}
-        #revise 
+                return {'logged':False}
         elif data['action']=='register':
             response = register_temp(data,db,conf[4],conf[5])
             return response
-        elif data['action']=='update_password':
-            response = reset(data,db)
-            return response
-
 
 #Api gmail verif
 @server.route('/api/add_user/<mail>/<id>',methods=['GET'])
@@ -75,7 +54,7 @@ def verif(mail,id):
     else:
         return redirect('/admin')
 
-#Api route
+#Api activity
 @server.route('/api/add',methods=['POST'])
 def actividty_add():
     rq = request.get_json()
@@ -97,7 +76,33 @@ def estadistics_host_calcule():
     context= calcule_host(rq,db)
     return {'id':request.get_json(),'status':context}
 
+#Api catalog
+@server.route('/api/catalog',methods=['GET','POST'])
+def catalog ():
+    if request.method == 'GET':
+        response =[]
+        cat = db.datasearch(db.querys({'action':'read_catalog'}))
+        if cat != ():
+            for i in cat:
+                response.append({'id':i[0],'price':i[1],'name':i[2],'description':i[3]})
+        return {'catalog':response}
+
+    elif request.method == 'POST':
+        data = request.get_json()
+        if data['action']=='add':
+            data['action']='add_catalog'
+            response =db.datainsert(db.querys(data))
+            return {'status':response}
+        elif data['action']=='delete':
+            data['action']='delete_catalog'
+            response =db.datainsert(db.querys(data))
+            return {'status':response}
+        elif data['action']=='update':
+            data['action']='delete_catalog'
+            response =db.datainsert(db.querys(data))
+            return {'status':response}
+
 
 if __name__ == '__main__':
-    server.run(debug=True, host='192.168.60.16')
-    # server.run(debug=True, host='192.168.2.252')
+    server.run(debug=True, host='192.168.60.12')
+    #server.run(debug=True, host='localhost')
