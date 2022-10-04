@@ -98,7 +98,7 @@ def catalog ():
             response =db.datainsert(db.querys(data))
             return {'status':response}
         elif data['action']=='update':
-            data['action']='delete_catalog'
+            data['action']='update_catalog'
             response =db.datainsert(db.querys(data))
             return {'status':response}
 

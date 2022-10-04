@@ -76,4 +76,6 @@ class DataBase:
             return f"insert into CATALOG(NAME,DESCRIPTION,PRICE) values('{data['name']}','{data['description']}',{data['price']});"
         elif data['action']=='delete_catalog':
             return f"delete from CATALOG where id = {data['id']};"
+        elif data['action']=='update_catalog':
+            return f"update CATALOG set abs = ;"
         #insert into ACTIVITY(NAME,MAIL,SEX,HOUR,DAY,MONTH,YEAR) values ('tomas','tomimedeot@gmail.com','hombre',,,,);
