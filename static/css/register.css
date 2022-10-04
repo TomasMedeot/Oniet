@@ -13,6 +13,7 @@
 /* Main */
 #register__main {
     background-color: white;
+    display: none;
     min-height: 75vh;
 }
 

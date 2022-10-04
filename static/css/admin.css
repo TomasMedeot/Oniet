@@ -1,5 +1,20 @@
 
+/* Header */
+#admin__header {
+    display: none;
+}
+
+#admin__logo {
+    background-color: white;
+    /* margin: 1em; */
+    width: 6em;
+}
+
 /* Main */
+#admin__main {
+    display: none;
+}
+
 #admin__div {
     /* text-align: center; */
     margin: 0px auto;
