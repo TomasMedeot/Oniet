@@ -27,7 +27,7 @@ def home ():
 @server.route('/admin',methods=['GET','POST'])
 def admin ():
     if request.method == 'GET':
-        return render_template('login.html')
+        return render_template('admin.html')
         
     if request.method == 'POST':
         data = request.get_json()
@@ -93,7 +93,11 @@ def catalog ():
             data['action']='add_catalog'
             response =db.datainsert(db.querys(data))
             return {'status':response}
-        if data['action']=='delete':
+        elif data['action']=='delete':
+            data['action']='delete_catalog'
+            response =db.datainsert(db.querys(data))
+            return {'status':response}
+        elif data['action']=='update':
             data['action']='delete_catalog'
             response =db.datainsert(db.querys(data))
             return {'status':response}
