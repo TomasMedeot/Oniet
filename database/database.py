@@ -70,4 +70,10 @@ class DataBase:
             return f"select ID from ADMIN_TEMP where mail like '{data['email']}';"
         elif data['action']=='delete_temp_user':
             return f"delete from ADMIN_TEMP where mail like '{data['email']}';"
+        elif data['action']=='read_catalog':
+            return f"select * from CATALOG;"
+        elif data['action']=='add_catalog':
+            return f"insert into CATALOG(NAME,DESCRIPTION,PRICE) values('{data['name']}','{data['description']}',{data['price']});"
+        elif data['action']=='delete_catalog':
+            return f"delete from CATALOG where id = {data['id']};"
         #insert into ACTIVITY(NAME,MAIL,SEX,HOUR,DAY,MONTH,YEAR) values ('tomas','tomimedeot@gmail.com','hombre',,,,);
