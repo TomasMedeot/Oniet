@@ -77,5 +77,5 @@ class DataBase:
         elif data['action']=='delete_catalog':
             return f"delete from CATALOG where id = {data['id']};"
         elif data['action']=='update_catalog':
-            return f"update CATALOG set abs = ;"
+            return f"update CATALOG set NAME = '{data['name']}', DESCRIPTION = '{data['description']}',PRICE = {data['price']} where ID = {data['id']};"
         #insert into ACTIVITY(NAME,MAIL,SEX,HOUR,DAY,MONTH,YEAR) values ('tomas','tomimedeot@gmail.com','hombre',,,,);

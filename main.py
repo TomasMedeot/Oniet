@@ -34,7 +34,7 @@ def admin ():
         if data['action']=='login':
             response = login(data,db)
             if response != None:
-                return {'logged':True,'user':response}
+                return {'logged':True,'user':response[0]}
             else:
                 return {'logged':False}
         elif data['action']=='register':
@@ -104,5 +104,5 @@ def catalog ():
 
 
 if __name__ == '__main__':
-    server.run(debug=True, host='192.168.60.12')
-    #server.run(debug=True, host='localhost')
+    #server.run(debug=True, host='192.168.60.12')
+    server.run(debug=True, host='localhost')
