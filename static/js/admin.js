@@ -22,4 +22,6 @@ window.addEventListener('load', () => {
         adminStats.classList.add('show');
         adminStats.classList.remove('hidden');
     })
+
+    
 })

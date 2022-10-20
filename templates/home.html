@@ -8,6 +8,7 @@
     <script src="{{ url_for('static', filename='bootstrap-5.2.2/js/bootstrap.min.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" />
     <title>Home</title>
+    <script src="{{ url_for('static', filename='js/home.js') }}"></script>
 </head>
 <body>
     <header>
@@ -17,7 +18,11 @@
     </header>
     <main id="home__main">
         <div id="home__div">
-            <h2>home</h2>
+            <!-- Catálogo -->
+            <h4 class="mt-4">Catálogo</h4>
+            <ul id="home__catalog-list" class="list-group">
+
+            </ul>
         </div>
     </main>
     <footer>

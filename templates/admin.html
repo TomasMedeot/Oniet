@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/stats.css') }}" />
     <title id="login__title">Login Admin</title>
+    <script src="{{ url_for('static', filename='js/chart/chart.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/login.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
 </head>
@@ -45,35 +46,6 @@
             </div>
         </nav>
     </header>
-    <main id="register__main">
-        <div id="register__div">
-            <h2>Registro</h2>
-            <form>
-                <div class="mb-3">
-                    <label for="register__name-input" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="register__name-input" aria-describedby="emailHelp" required>
-                </div>
-                <div class="mb-3">
-                    <label for="register__email-input" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="register__email-input" aria-describedby="emailHelp" required>
-                    <div id="emailHelp" class="form-text">Nunca compartiremos tu email con nadie más.</div>
-                </div>
-                <div class="mb-3">
-                    <label for="register__pass-input" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" id="register__pass-input" required maxlength="10">
-                </div>
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="register__remember-user">
-                    <label class="form-check-label" for="register__remember-user">Recordar usuario</label>
-                </div>
-                <button type="submit" class="btn btn-primary" id="register__button-submit">Entrar</button> 
-                <br>
-                <div>
-                    <span>Ya tenes una cuenta? </span><button id="register__button-login" class="btn btn-outline-dark">Ingresa ahora</button>
-                </div>
-            </form>
-        </div>
-    </main>
     <main id="login__main">
         <div id="login__div">
             <h2>Login</h2>
@@ -94,86 +66,57 @@
                     <label class="form-check-label" for="login__remember-user">Recordar usuario</label>
                 </div>
                 <button type="submit" class="btn btn-primary" id="login__button-submit">Entrar</button> 
-                <br>
-                <div>
-                    <span>No tenes una cuenta? </span><button id="login__button-register" class="btn btn-outline-dark">Registrate ahora</button>
-                </div>
-                <!-- <div>No tenes una cuenta? <a href="/register">Registrate ahora</a></div> -->
             </form>
         </div>
     </main>
     <main id="admin__main">
         <div id="admin__div">
-            <h2>Hola, {usuario}</h2>
+            <h2 id="admin__hello">Hola, {usuario}</h2>
+
+            <!-- Catálogo -->
             <h4 class="mt-4">Catálogo</h4>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-10">
-                            Producto 1
-                        </div>
-                        <div class="col-1">
-                            <button class="btn btn-primary mx-2">Editar</button>
-                        </div>
-                        <div class="col-1">
-                            <button class="btn btn-danger mx-2">Borrar</button>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-10">
-                            Producto 2
-                        </div>
-                        <div class="col-1">
-                            <button class="btn btn-primary mx-2">Editar</button>
-                        </div>
-                        <div class="col-1">
-                            <button class="btn btn-danger mx-2">Borrar</button>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-10">
-                            Producto 3
-                        </div>
-                        <div class="col-1">
-                            <button class="btn btn-primary mx-2">Editar</button>
-                        </div>
-                        <div class="col-1">
-                            <button class="btn btn-danger mx-2">Borrar</button>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-10">
-                            Producto 4
-                        </div>
-                        <div class="col-1">
-                            <button class="btn btn-primary mx-2">Editar</button>
-                        </div>
-                        <div class="col-1">
-                            <button class="btn btn-danger mx-2">Borrar</button>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-10">
-                            Producto 5
-                        </div>
-                        <div class="col-1">
-                            <button class="btn btn-primary mx-2">Editar</button>
-                        </div>
-                        <div class="col-1">
-                            <button class="btn btn-danger mx-2">Borrar</button>
-                        </div>
-                    </div>
-                </li>
+            <ul id="admin__catalog-list" class="list-group">
+
             </ul>
-            <button class="btn btn-success mt-3">Agregar</button>
+
+            <!-- Button trigger Form -->
+            <button type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#formModal">Agregar</button>
+            <!-- Form -->
+            <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="formModalLabel">Agregar Producto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <div id="admin__form-name-required" class="text-danger" hidden>Requerido</div>
+                                <label for="admin__form-input-name" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="admin__form-input-name" placeholder="Producto 1" aria-describedby="emailHelp" required>
+                            </div>
+                            <div class="mb-3">
+                                <div id="admin__form-desc-required" class="text-danger" hidden>Requerido</div>
+                                <label for="admin__form-input-desc" class="form-label">Descripción</label>
+                                <input type="text" class="form-control" id="admin__form-input-desc" placeholder="Producto Glorioso" required>
+                            </div>
+                            <div class="mb-3">
+                                <div id="admin__form-price-required" class="text-danger" hidden>Requerido</div>
+                                <label for="admin__form-input-price" class="form-label">Precio</label>
+                                <input type="number" class="form-control" id="admin__form-input-price" placeholder="14.00" required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="admin__form-add-button">Agregar</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <!-- Usuarios -->
             <h4 class="mt-4">Usuarios</h4>
             <ul class="list-group">
                 <li class="list-group-item">
@@ -236,6 +179,76 @@
         <div>
             <h2>Hola, {usuario}</h2>
             <h4 class="mt-4">Stats</h4>
+            <label for="type"></label>
+            <select name="type" id="type">
+                <option value="0">-- type --</option>
+                <option value="General">General</option>
+                <option value="Host">Host</option>
+            </select>
+            <select name="methric" id="methric">
+                <option value="0">-- methric --</option>
+                <option value="year">year</option>
+                <option value="month">month</option>
+                <option value="day">day</option>
+            </select>
+            <!-- Year -->
+            <input type="number">
+            <select name="month" id="month">
+                <option value="0">-- month --</option>
+                <option value="january">january</option>
+                <option value="february">february</option>
+                <option value="march">march</option>
+                <option value="april">april</option>
+                <option value="may">may</option>
+                <option value="june">june</option>
+                <option value="july">july</option>
+                <option value="august">august</option>
+                <option value="september">september</option>
+                <option value="october">october</option>
+                <option value="november">november</option>
+                <option value="december">december</option>
+            </select>
+            <select name="day" id="day">
+                <option value="0">-- day --</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+            </select>
+            <button type="button" id="admin__stats-btn-show-chart">Show Chart</button>
+            <!-- <select name="" id="">
+                <option value=""></option>
+            </select> -->
+            <div class="w-50 mh-25 mx-auto mt-5">
+                <canvas id="myChart" width="400" height="100"></canvas>
+            </div>
         </div>
     </main>
     <footer>
