@@ -43,7 +43,7 @@ def calcule_host(data,database):
         data['action']='read_host_by_day'
         response = database.datasearch(database.querys(data))
         for r in response:
-            status[str(r[4])] = status[str(r[4])]+1
+            status[str(r[1])] = status[str(r[1])]+1
         escale = {'escale':status[max(status.items(), key=operator.itemgetter(1))[0]]}
         return status, escale
     
@@ -52,7 +52,7 @@ def calcule_host(data,database):
         data['action']='read_host_by_month'
         response = database.datasearch(database.querys(data))
         for r in response:
-            status[str(r[5])] = status[str(r[5])]+1
+            status[str(r[2])] = status[str(r[2])]+1
         escale = {'escale':status[max(status.items(), key=operator.itemgetter(1))[0]]}
         return status, escale
     
@@ -61,6 +61,6 @@ def calcule_host(data,database):
         data['action']='read_host_by_year'
         response = database.datasearch(database.querys(data))
         for r in response:
-            status[str(r[6])] = status[str(r[6])]+1
+            status[str(r[3])] = status[str(r[3])]+1
         escale = {'escale':status[max(status.items(), key=operator.itemgetter(1))[0]]}
         return status, escale
