@@ -80,4 +80,8 @@ class DataBase:
             return f"delete from CATALOG where id = {data['id']};"
         elif data['action']=='update_catalog':
             return f"update CATALOG set NAME = '{data['name']}', DESCRIPTION = '{data['description']}',PRICE = {data['price']} where ID = {data['id']};"
+        elif data['action']=='add_catalog_estadistics':
+            return f"insert into CATALOG_ESTADISTICS (id_p) values({data['id']});"
+        elif data['action']=='read_catalog_estadistics':
+            return f"select * from CATALOG_ESTADISTICS;"
         #insert into ACTIVITY(NAME,MAIL,SEX,HOUR,DAY,MONTH,YEAR) values ('tomas','tomimedeot@gmail.com','hombre',,,,);

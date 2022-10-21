@@ -2,7 +2,7 @@ from flask import *
 from flask_cors import *
 from database.database import *
 from config.config import xml
-from estadistics.estadistics import calcule, calcule_host
+from estadistics.estadistics import calcule, calcule_host , calcule_product
 from admin_users.Login.login import login
 from admin_users.Register.register import register, register_temp
 from admin_users.Resetp.resetp import reset
@@ -75,6 +75,17 @@ def estadistics_host_calcule():
     rq = request.get_json()
     context= calcule_host(rq,db)
     return {'id':request.get_json(),'status':context}
+
+#Api product stadistics
+@server.route('/api/product/estadistics',methods=['POST'])
+def estadistics_product():
+    if request.method == 'GET':
+        rq = request.get_json()
+        context= calcule_product(rq,db)
+        return {'id':request.get_json(),'status':context}
+    elif request.method == 'POST':
+        rq = request.get_json()
+        db.datainsert(db.querys({'action':'add_catalog_estadistics','id':rq['id']}))
 
 #Api catalog
 @server.route('/api/catalog',methods=['GET','POST'])
