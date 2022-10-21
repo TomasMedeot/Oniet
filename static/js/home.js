@@ -20,30 +20,36 @@ window.addEventListener('load', () => {
                 const li = document.createElement("li");
                 li.className = "list-group-item";
                 li.innerHTML = `
-                    <div class="row">
-                        <div class="col-10">
-                            // TODO: Fix This
-                            <button type="button" data-bs-toggle="modal" data-bs-target="${product.name}">${product.name} ${product.price}</button>
-                            <!-- Form -->
-                            <div class="modal fade" id="${product.name}" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="formModalLabel">Agregar Producto</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div>${product.name}</div>
-                                    </div>
-                                    <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                    <button type="button" class="btn btn-primary" id="admin__form-add-button">Agregar</button>
-                                    </div>
+                <div class="row">
+                    <div class="col-10">
+                        ${product.name} $${product.price}
+                    </div>
+                    <div class="col-2">
+                        <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#formModalDetail${product.id}">Ver detalle</button>
+                        <!-- Update Form -->
+                        <div class="modal fade" id="formModalDetail${product.id}" tabindex="-1" aria-labelledby="formModalLabelDetail" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="formModalLabelDetail">Detalle del Producto</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
+                                <div class="modal-body">
+                                    <h5>Nombre</h5>
+                                    <p>${product.name}</p>
+                                    <h5>Descripción</h5>
+                                    <p>${product.description}</p>
+                                    <h5>Precio</h5>
+                                    <p>$${product.price}</p>
                                 </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>
+                </div>
                 `
                 catalog_list.appendChild(li);
             })

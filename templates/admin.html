@@ -180,7 +180,6 @@
     </main>
     <main id="admin__stats">
         <div>
-            <h2 id="admin__stats-hello">Hola, {usuario}</h2>
             <h4 class="mt-4">Stats</h4>
             <!-- Input Route -->
             <label for="route"></label>
@@ -196,65 +195,127 @@
                 <option value="month">month</option>
                 <option value="day">day</option>
             </select>
-            <!-- Input Year -->
-            <input type="number" id="admin__stats-input-year" placeholder="year" hidden>
-            <!-- Input Month -->
-            <select name="month" id="admin__stats-input-month" hidden>
-                <option value="0">-- month --</option>
-                <option value=1>january</option>
-                <option value=2>february</option>
-                <option value=3>march</option>
-                <option value=4>april</option>
-                <option value=5>may</option>
-                <option value=6>june</option>
-                <option value=7>july</option>
-                <option value=8>august</option>
-                <option value=9>september</option>
-                <option value=10>october</option>
-                <option value=11>november</option>
-                <option value=12>december</option>
+            <!-- Input Comparation -->
+            <select name="comparation" id="admin__stats-input-comparation">
+                <option value="0">-- comparation --</option>
+                <option value="no">no</option>
+                <option value="yes">yes</option>
             </select>
-            <!-- Input Day -->
-            <select name="day" id="admin__stats-input-day" hidden>
-                <option value=0>-- day --</option>
-                <option value=1>1</option>
-                <option value=2>2</option>
-                <option value=3>3</option>
-                <option value=4>4</option>
-                <option value=5>5</option>
-                <option value=6>6</option>
-                <option value=7>7</option>
-                <option value=8>8</option>
-                <option value=9>9</option>
-                <option value=10>10</option>
-                <option value=11>11</option>
-                <option value=12>12</option>
-                <option value=13>13</option>
-                <option value=14>14</option>
-                <option value=15>15</option>
-                <option value=16>16</option>
-                <option value=17>17</option>
-                <option value=18>18</option>
-                <option value=19>19</option>
-                <option value=20>20</option>
-                <option value=21>21</option>
-                <option value=22>22</option>
-                <option value=23>23</option>
-                <option value=24>24</option>
-                <option value=25>25</option>
-                <option value=26>26</option>
-                <option value=27>27</option>
-                <option value=28>28</option>
-                <option value=29>29</option>
-                <option value=30>30</option>
-                <option value=31>31</option>
-            </select>
-            <button type="button" id="admin__stats-btn-show-chart">Show Chart</button>
-            <!-- <select name="" id="">
-                <option value=""></option>
-            </select> -->
+            <div>
+                <div>
+                    <!-- Input Year -->
+                    <input type="number" id="admin__stats-input-year" placeholder="year" hidden>
+                    <!-- Input Month -->
+                    <select name="month" id="admin__stats-input-month" hidden>
+                        <option value="0">-- month --</option>
+                        <option value=1>january</option>
+                        <option value=2>february</option>
+                        <option value=3>march</option>
+                        <option value=4>april</option>
+                        <option value=5>may</option>
+                        <option value=6>june</option>
+                        <option value=7>july</option>
+                        <option value=8>august</option>
+                        <option value=9>september</option>
+                        <option value=10>october</option>
+                        <option value=11>november</option>
+                        <option value=12>december</option>
+                    </select>
+                    <!-- Input Day -->
+                    <select name="day" id="admin__stats-input-day" hidden>
+                        <option value=0>-- day --</option>
+                        <option value=1>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5>5</option>
+                        <option value=6>6</option>
+                        <option value=7>7</option>
+                        <option value=8>8</option>
+                        <option value=9>9</option>
+                        <option value=10>10</option>
+                        <option value=11>11</option>
+                        <option value=12>12</option>
+                        <option value=13>13</option>
+                        <option value=14>14</option>
+                        <option value=15>15</option>
+                        <option value=16>16</option>
+                        <option value=17>17</option>
+                        <option value=18>18</option>
+                        <option value=19>19</option>
+                        <option value=20>20</option>
+                        <option value=21>21</option>
+                        <option value=22>22</option>
+                        <option value=23>23</option>
+                        <option value=24>24</option>
+                        <option value=25>25</option>
+                        <option value=26>26</option>
+                        <option value=27>27</option>
+                        <option value=28>28</option>
+                        <option value=29>29</option>
+                        <option value=30>30</option>
+                        <option value=31>31</option>
+                    </select>
+                </div>
+                <div>
+                    <!-- Input YearTwo -->
+                    <input type="number" id="admin__stats-input-year-two" placeholder="year2" hidden>
+                    <!-- Input MonthTwo -->
+                    <select name="month" id="admin__stats-input-month-two" hidden>
+                        <option value="0">-- month2 --</option>
+                        <option value=1>january</option>
+                        <option value=2>february</option>
+                        <option value=3>march</option>
+                        <option value=4>april</option>
+                        <option value=5>may</option>
+                        <option value=6>june</option>
+                        <option value=7>july</option>
+                        <option value=8>august</option>
+                        <option value=9>september</option>
+                        <option value=10>october</option>
+                        <option value=11>november</option>
+                        <option value=12>december</option>
+                    </select>
+                    <!-- Input DayTwo -->
+                    <select name="day" id="admin__stats-input-day-two" hidden>
+                        <option value=0>-- day2 --</option>
+                        <option value=1>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5>5</option>
+                        <option value=6>6</option>
+                        <option value=7>7</option>
+                        <option value=8>8</option>
+                        <option value=9>9</option>
+                        <option value=10>10</option>
+                        <option value=11>11</option>
+                        <option value=12>12</option>
+                        <option value=13>13</option>
+                        <option value=14>14</option>
+                        <option value=15>15</option>
+                        <option value=16>16</option>
+                        <option value=17>17</option>
+                        <option value=18>18</option>
+                        <option value=19>19</option>
+                        <option value=20>20</option>
+                        <option value=21>21</option>
+                        <option value=22>22</option>
+                        <option value=23>23</option>
+                        <option value=24>24</option>
+                        <option value=25>25</option>
+                        <option value=26>26</option>
+                        <option value=27>27</option>
+                        <option value=28>28</option>
+                        <option value=29>29</option>
+                        <option value=30>30</option>
+                        <option value=31>31</option>
+                    </select>
+                </div>
+                <button type="button" id="admin__stats-btn-show-chart">Show Chart</button>
+            </div>
             <div class="w-50 mh-25 mx-auto mt-5">
-                <canvas id="myChart" width="400" height="300"></canvas>
+                <canvas id="myChart" width="400" height="200"></canvas>
             </div>
         </div>
     </main>

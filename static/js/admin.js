@@ -116,7 +116,6 @@ window.addEventListener('load', () => {
                 adminHeader.classList.add('show');
 
                 loginTitle.innerHTML = "Estadisticas"
-                adminStatsHello.innerHTML = `Hola, ${name}`
             }
         } else if (logged === "false") {
             adminMain.classList.remove('show');

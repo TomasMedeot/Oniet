@@ -1,5 +1,15 @@
 
 
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer{
+    margin-top: auto;
+}
+
 /* Header */
 #home__header {
     background-color: #212529;
