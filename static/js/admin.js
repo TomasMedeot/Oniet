@@ -58,7 +58,7 @@ window.addEventListener('load', () => {
                         li.innerHTML = `
                             <div class="row">
                                 <div class="col-10">
-                                    ${product.name} ${product.price}
+                                    ${product.name} $${product.price}
                                 </div>
                                 <div class="col-1">
                                     <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#formModalUpdate${product.id}">Editar</button>
@@ -164,7 +164,7 @@ window.addEventListener('load', () => {
                 li.innerHTML = `
                     <div class="row">
                         <div class="col-10">
-                            ${product.name} ${product.price}
+                            ${product.name} $${product.price}
                         </div>
                         <div class="col-1">
                             <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#formModalUpdate${product.id}">Editar</button>
@@ -237,7 +237,7 @@ window.addEventListener('load', () => {
                 li.innerHTML = `
                     <div class="row">
                         <div class="col-10">
-                            ${product.name} ${product.price}
+                            ${product.name} $${product.price}
                         </div>
                         <div class="col-1">
                             <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#formModalUpdate${product.id}">Editar</button>

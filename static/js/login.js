@@ -112,7 +112,7 @@ window.addEventListener('load', () => {
                             li.innerHTML = `
                                 <div class="row">
                                     <div class="col-10">
-                                        ${product.name} ${product.price}
+                                        ${product.name} $${product.price}
                                     </div>
                                     <div class="col-1">
                                         <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#formModalUpdate${product.id}">Editar</button>
@@ -220,7 +220,7 @@ window.addEventListener('load', () => {
                         li.innerHTML = `
                         <div class="row">
                             <div class="col-10">
-                                ${product.name} ${product.price}
+                                ${product.name} $${product.price}
                             </div>
                             <div class="col-1">
                                 <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#formModalUpdate" onclick="updateProduct(${product.id})">Editar</button>
@@ -253,7 +253,6 @@ window.addEventListener('load', () => {
     const inputRoute = document.getElementById("admin__stats-input-route");
     inputRoute.addEventListener('change', (e) => {
         e.preventDefault();
-        console.log(inputRoute.value);
         if (inputRoute.value == "host") {
             route = "http://localhost:5000/api/host/estadistics";
         } else if (inputRoute.value == "general") {
@@ -270,21 +269,30 @@ window.addEventListener('load', () => {
         if (inputMethric.value !== "0") {
             methric = inputMethric.value;
             if (comparation === "no") {
-                console.log(methric)
                 if (methric === "year") {
                     document.getElementById("admin__stats-input-year").hidden = false
+                    document.getElementById("admin__stats-input-year-two").hidden = true
     
                     document.getElementById("admin__stats-input-month").hidden = true
+                    document.getElementById("admin__stats-input-month-two").hidden = true
                     document.getElementById("admin__stats-input-day").hidden = true
+                    document.getElementById("admin__stats-input-day-two").hidden = true
                 } else if (methric === "month") {
                     document.getElementById("admin__stats-input-year").hidden = false
+                    document.getElementById("admin__stats-input-year-two").hidden = true
                     document.getElementById("admin__stats-input-month").hidden = false
+                    document.getElementById("admin__stats-input-month-two").hidden = true
     
                     document.getElementById("admin__stats-input-day").hidden = true
+                    document.getElementById("admin__stats-input-day-two").hidden = true
     
                 } else if (methric === "day") {
                     document.getElementById("admin__stats-input-year").hidden = false
                     document.getElementById("admin__stats-input-month").hidden = false
+                    document.getElementById("admin__stats-input-day").hidden = false
+
+                    document.getElementById("admin__stats-input-year-two").hidden = false
+                    document.getElementById("admin__stats-input-month-two").hidden = false
                     document.getElementById("admin__stats-input-day").hidden = false
                 }
             } else if (comparation === "yes") {
@@ -303,7 +311,7 @@ window.addEventListener('load', () => {
                     document.getElementById("admin__stats-input-month-two").hidden = false
     
                     document.getElementById("admin__stats-input-day").hidden = true
-    
+                    document.getElementById("admin__stats-input-day-two").hidden = true
                 } else if (methric === "day") {
                     document.getElementById("admin__stats-input-year").hidden = false
                     document.getElementById("admin__stats-input-year-two").hidden = false
@@ -391,7 +399,6 @@ window.addEventListener('load', () => {
             document.getElementById("admin__stats-input-day").hidden = true
             document.getElementById("admin__stats-input-day-two").hidden = true
         }
-
     });
 
     let year = '0';
@@ -508,7 +515,7 @@ window.addEventListener('load', () => {
                         data: {
                             labels: months.map((month) => month),
                             datasets: [{
-                                label: '# of Votes',
+                                label: `${year}/${month}/${day}`,
                                 data: values.map((value) => value),
                                 backgroundColor: [
                                     'rgba(153, 102, 255, 0.2)',
@@ -566,7 +573,7 @@ window.addEventListener('load', () => {
                                 labels: months.map((month) => month),
                                 datasets: [
                                     {
-                                        label: '# of Votes',
+                                        label: `${year}/${month}/${day}`,
                                         data: values.map((value) => value),
                                         backgroundColor: [
                                             'rgba(153, 102, 255, 0.2)',
@@ -577,7 +584,7 @@ window.addEventListener('load', () => {
                                         borderWidth: 1
                                     },
                                     {
-                                        label: '# of Votes',
+                                        label: `${yearTwo}/${monthTwo}/${dayTwo}`,
                                         data: valuesTwo.map((valueTwo) => valueTwo),
                                         backgroundColor: [
                                             'rgba(255, 205, 86, 0.2)',
