@@ -243,10 +243,6 @@ window.addEventListener('load', () => {
         }
     })
 
-    // Update Product Button
-
-    
-
 
     // STADISTICS
     let route = '0';
@@ -255,10 +251,24 @@ window.addEventListener('load', () => {
         e.preventDefault();
         if (inputRoute.value == "host") {
             route = "http://localhost:5000/api/host/estadistics";
+
+            document.getElementById("admin__stats-input-methric").hidden = false
+            document.getElementById("admin__stats-input-comparation").hidden = false
         } else if (inputRoute.value == "general") {
             route = "http://localhost:5000/api/general/estadistics";
-        } else {
+
+            document.getElementById("admin__stats-input-methric").hidden = false
+            document.getElementById("admin__stats-input-comparation").hidden = false
+        } else if (inputRoute.value == "product") {
+            route = "http://localhost:5000/api/product/estadistics";
+
+            document.getElementById("admin__stats-input-methric").hidden = true
+            document.getElementById("admin__stats-input-comparation").hidden = true
+        }else {
             route = "0";
+
+            document.getElementById("admin__stats-input-methric").hidden = true
+            document.getElementById("admin__stats-input-comparation").hidden = true
         }
     });
 
@@ -489,7 +499,7 @@ window.addEventListener('load', () => {
         console.log('datos 1: ', _datos);
         console.log('datos 2: ', _datosTwo);
         console.log(comparation)
-        if (route !== "0") {
+        if (route !== "0" && inputRoute.value !== "product") {
             if (comparation === "no") {
                 doPost(route, _datos)
                 .then((data) => {
@@ -607,6 +617,44 @@ window.addEventListener('load', () => {
                     });
                 });
             }
+        } else if (inputRoute.value === "product") {
+            console.log("Entré a la ruta product")
+            doGet(route)
+            .then((data) => {
+                console.log(data);
+
+                const ctx = document.getElementById('myChart').getContext('2d');
+                if (myChart) {
+                    myChart.destroy();
+                }
+                myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.status.map((product) => product.name),
+                        // labels: months.map((month) => month),
+                        datasets: [{
+                            label: 'product',
+                            // label: `${year}/${month}/${day}`,
+                            data: data.status.map((product) => product.visualitions),
+                            // data: values.map((value) => value),
+                            backgroundColor: [
+                                'rgba(153, 102, 255, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgba(153, 102, 255, 1)',
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
         }
     })
 })

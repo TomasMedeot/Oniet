@@ -7,15 +7,21 @@ def calcule_product(database):
     if cat != ():
         for i in cat:
             products.append({'id':i[0],'name':i[2],'visualitions':0})
-    est = database.datasearch(database.querys({'action':'read_catalog_estadistcs'}))
+    print(products)
+    est = database.datasearch(database.querys({'action':'read_catalog_estadistics'}))
     if est != ():
-        for i in cat:
+        print(est)
+        for i in est:
             visualitions.append({'id':i[0],'id_p':i[1]})
+    print(visualitions)
     for e in visualitions:
         for i in products:
+            print(i['id'])
+            print(e['id_p'])
             if i['id']==e['id_p']:
+                print('a')
                 i['visualitions']=i['visualitions']+1
-    return visualitions
+    return products
 
 def calcule(data,database):
     if data['type']=='day':

@@ -12,12 +12,12 @@ class DataBase:
     #Is the conection to the database for insert , update or delete
     def datainsert(self,accion:str):
         '''This function need the sql instruction, returns 'msj':'DB correctly'//'DB error' '''
-        try:
-            self.cursor.execute(accion)
-            self.conn.commit()
-            return {'msj':'DB correctly'}
-        except:
-            return {'msj':'DB error'}
+        #try:
+        self.cursor.execute(accion)
+        self.conn.commit()
+        return {'msj':'DB correctly'}
+        #except:
+        #    return {'msj':'DB error'}
 
     #Is the connection to the database for read information
     def datasearch(self,accion:str):
@@ -81,7 +81,7 @@ class DataBase:
         elif data['action']=='update_catalog':
             return f"update CATALOG set NAME = '{data['name']}', DESCRIPTION = '{data['description']}',PRICE = {data['price']} where ID = {data['id']};"
         elif data['action']=='add_catalog_estadistics':
-            return f"insert into CATALOG_ESTADISTICS (id_p) values({data['id']});"
+            return f"insert into CATALOG_ESTADISTICS (ID_PRODUCT) values({data['id']});"
         elif data['action']=='read_catalog_estadistics':
             return f"select * from CATALOG_ESTADISTICS;"
         #insert into ACTIVITY(NAME,MAIL,SEX,HOUR,DAY,MONTH,YEAR) values ('tomas','tomimedeot@gmail.com','hombre',,,,);

@@ -77,15 +77,15 @@ def estadistics_host_calcule():
     return {'id':request.get_json(),'status':context}
 
 #Api product stadistics
-@server.route('/api/product/estadistics',methods=['POST'])
+@server.route('/api/product/estadistics',methods=['GET', 'POST'])
 def estadistics_product():
     if request.method == 'GET':
-        rq = request.get_json()
-        context= calcule_product(rq,db)
-        return {'id':request.get_json(),'status':context}
+        context= calcule_product(db)
+        return {'status':context}
     elif request.method == 'POST':
         rq = request.get_json()
-        db.datainsert(db.querys({'action':'add_catalog_estadistics','id':rq['id']}))
+        print(db.datainsert(db.querys({'action':'add_catalog_estadistics','id':rq['id']})))
+        return {'status':'ok'}
 
 #Api catalog
 @server.route('/api/catalog',methods=['GET','POST'])
