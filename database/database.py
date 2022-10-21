@@ -42,6 +42,8 @@ class DataBase:
             month = now.month
             year = now.year
             return f"insert into ACTIVITY_HOTSPOT(HOUR,DAY,MONTH,YEAR) values ({hour},{day},{month},{year});"
+        elif data['action']=='add_host_activity_gen':
+            return f"insert into ACTIVITY_HOTSPOT(HOUR,DAY,MONTH,YEAR) values ({data['hour']},{data['day']},{data['month']},{data['year']});"
         elif data['action']=='read_by_year':
             return f"select * from ACTIVITY where YEAR = {data['year']};"
         elif data['action']=='read_by_month':
