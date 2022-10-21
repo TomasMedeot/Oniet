@@ -12,11 +12,10 @@ window.addEventListener('load', () => {
     const adminHeader = document.getElementById("admin__header");
 
     const btnAddCatalog = document.getElementById("admin__form-add-button");
+    const btnUpdateCatalog = document.getElementById("admin__form-update-button");
     
     
     // STADISTICS
-
-
     const btnShowChart = document.getElementById("admin__stats-btn-show-chart");
     let myChart;
 
@@ -27,6 +26,7 @@ window.addEventListener('load', () => {
         console.log(user);
         localStorage.setItem('logged', true);
         localStorage.setItem('name', user[1]);
+        localStorage.setItem('path', 'admin');
 
         const name = localStorage.getItem('name')
 
@@ -40,9 +40,10 @@ window.addEventListener('load', () => {
         adminMain.classList.add('show');
 
         loginHeader.classList.add('hidden');
-        adminHeader.classList.add('show');
+        loginHeader.classList.remove('show');
 
-        
+        adminHeader.classList.add('show');
+        adminHeader.classList.remove('hidden');
     }
 
     const doGet = async(url = '') => {
@@ -114,10 +115,41 @@ window.addEventListener('load', () => {
                                         ${product.name} ${product.price}
                                     </div>
                                     <div class="col-1">
-                                        <button class="btn btn-primary mx-2">Editar</button>
+                                        <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#formModalUpdate${product.id}">Editar</button>
+                                        <!-- Update Form -->
+                                        <div class="modal fade" id="formModalUpdate${product.id}" tabindex="-1" aria-labelledby="formModalLabelUpdate" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="formModalLabelUpdate">Editar Producto</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="mb-3">
+                                                            <label for="admin__form-update-input-name${product.id}" class="form-label">Nombre</label>
+                                                            <input type="text" class="form-control" id="admin__form-update-input-name${product.id}" aria-describedby="emailHelp" value="${product.name}" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="admin__form-update-input-desc${product.id}" class="form-label">Descripción</label>
+                                                            <input type="text" class="form-control" id="admin__form-update-input-desc${product.id}" value="${product.description}" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="admin__form-update-input-price${product.id}" class="form-label">Precio</label>
+                                                            <input type="number" class="form-control" id="admin__form-update-input-price${product.id}" value="${product.price}" required>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                <button type="button" class="btn btn-primary" id="admin__form-update-button${product.id}" onclick="updateProduct(${product.id})">Guardar</button>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-1">
-                                    <button class="btn btn-danger mx-2">Borrar</button>
+                                    <button class="btn btn-danger mx-2" onclick="deleteProduct(${product.id})">Borrar</button>
                                     </div>
                                 </div>
                             `
@@ -186,17 +218,17 @@ window.addEventListener('load', () => {
                         const li = document.createElement("li");
                         li.className = "list-group-item";
                         li.innerHTML = `
-                            <div class="row">
-                                <div class="col-10">
-                                    ${product.name} ${product.price}
-                                </div>
-                                <div class="col-1">
-                                    <button class="btn btn-primary mx-2">Editar</button>
-                                </div>
-                                <div class="col-1">
-                                <button class="btn btn-danger mx-2">Borrar</button>
-                                </div>
+                        <div class="row">
+                            <div class="col-10">
+                                ${product.name} ${product.price}
                             </div>
+                            <div class="col-1">
+                                <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#formModalUpdate" onclick="updateProduct(${product.id})">Editar</button>
+                            </div>
+                            <div class="col-1">
+                            <button class="btn btn-danger mx-2" onclick="deleteProduct(${product.id})">Borrar</button>
+                            </div>
+                        </div>
                         `
                         catalog_list.appendChild(li);
                     })
@@ -206,9 +238,14 @@ window.addEventListener('load', () => {
             formName.value = "";
             formDesc.value = "";
             formPrice.value = "";
+
+            window.location.reload();
         }
     })
 
+    // Update Product Button
+
+    
 
 
     // STADISTICS
