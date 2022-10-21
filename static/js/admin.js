@@ -6,6 +6,7 @@ window.addEventListener('load', () => {
     
     const buttonCatalogo = document.getElementById("admin__button-catalogo");
     const buttonEstadisticas = document.getElementById("admin__button-estadisticas");
+    const buttonLogout = document.getElementById("admin__button-logout");
 
     const loginHeader = document.getElementById("login__header");
     const adminHeader = document.getElementById("admin__header");
@@ -147,8 +148,9 @@ window.addEventListener('load', () => {
 
         localStorage.setItem('path', 'admin');
 
-        loginTitle.innerHTML = "Admin"
-        adminHello.innerHTML = `Hola, ${name}`
+        const name = localStorage.getItem('name');
+        loginTitle.innerHTML = "Admin";
+        adminHello.innerHTML = `Hola, ${name}`;
 
         // Fill catalog dinamically
         doGet('http://localhost:5000/api/catalog')
@@ -219,6 +221,7 @@ window.addEventListener('load', () => {
 
         localStorage.setItem('path', 'stats');
 
+        const name = localStorage.getItem('name')
         loginTitle.innerHTML = "Estadisticas"
         adminStatsHello.innerHTML = `Hola, ${name}`
 
@@ -280,4 +283,14 @@ window.addEventListener('load', () => {
             })
         });
     })
+
+    buttonLogout.addEventListener('click',  (e) => {
+        e.preventDefault();
+
+        localStorage.setItem('logged', 'false');
+        localStorage.setItem('name', '');
+        localStorage.setItem('path', '');
+
+        window.location.reload();            
+    });
 })
