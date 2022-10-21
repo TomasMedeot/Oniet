@@ -13,14 +13,20 @@ window.addEventListener('load', () => {
 
     const btnAddCatalog = document.getElementById("admin__form-add-button");
     
+    
+    // STADISTICS
+
+
     const btnShowChart = document.getElementById("admin__stats-btn-show-chart");
+    let myChart;
+
 
     const login = (data) => {
         const {user} = data;
 
         console.log(user);
         localStorage.setItem('logged', true);
-        localStorage.setItem('name', user[0][1]);
+        localStorage.setItem('name', user[1]);
 
         const name = localStorage.getItem('name')
 
@@ -56,6 +62,9 @@ window.addEventListener('load', () => {
         return response.json(); // parses JSON response into native JavaScript objects
     }
 
+    // LOGIN ADMIN
+
+    // Login Button
     buttonSubmit.addEventListener('click', (e) => {
         e.preventDefault();
         const email = document.getElementById("login__email-input").value
@@ -85,7 +94,7 @@ window.addEventListener('load', () => {
             doPost('http://localhost:5000/admin', _datos)
             .then((data) => {
                 console.log(data);
-                console.log(data.user[0][1]);
+                console.log(data.user[1]);
                 if (data.logged) {
                     login(data);
 
@@ -121,6 +130,9 @@ window.addEventListener('load', () => {
         }
     })
 
+    // ADMIN CATALOG
+
+    // Add Product Button
     btnAddCatalog.addEventListener('click', (e) => {
         e.preventDefault();
 
@@ -197,53 +209,146 @@ window.addEventListener('load', () => {
         }
     })
 
+
+
+    // STADISTICS
+    let route = '0';
+    const inputRoute = document.getElementById("admin__stats-input-route");
+    inputRoute.addEventListener('change', (e) => {
+        e.preventDefault();
+        console.log(inputRoute.value);
+        if (inputRoute.value == "host") {
+            route = "http://localhost:5000/api/host/estadistics";
+        } else if (inputRoute.value == "general") {
+            route = "http://localhost:5000/api/general/estadistics";
+        } else {
+            route = "0";
+        }
+    });
+
+    let methric = '0';
+    const inputMethric = document.getElementById("admin__stats-input-methric");
+    inputMethric.addEventListener('change', (e) => {
+        e.preventDefault();
+        if (inputMethric.value !== "0") {
+            methric = inputMethric.value;
+            if (methric === "year") {
+                document.getElementById("admin__stats-input-year").hidden = false
+
+                document.getElementById("admin__stats-input-month").hidden = true
+                document.getElementById("admin__stats-input-day").hidden = true
+            } else if (methric === "month") {
+                document.getElementById("admin__stats-input-year").hidden = false
+                document.getElementById("admin__stats-input-month").hidden = false
+
+                document.getElementById("admin__stats-input-day").hidden = true
+
+            } else if (methric === "day") {
+                document.getElementById("admin__stats-input-year").hidden = false
+                document.getElementById("admin__stats-input-month").hidden = false
+                document.getElementById("admin__stats-input-day").hidden = false
+            }
+
+        } else {
+            methric = "0";
+            document.getElementById("admin__stats-input-year").hidden = true
+            document.getElementById("admin__stats-input-month").hidden = true
+            document.getElementById("admin__stats-input-day").hidden = true
+        }
+
+    });
+
+    let year = '0';
+    const inputYear = document.getElementById("admin__stats-input-year");
+    inputYear.addEventListener('change', (e) => {
+        e.preventDefault();
+        if (Math.sign(inputYear.value) === 1) {
+            year = parseInt(inputYear.value);
+        } else {
+            year = "0";
+        }
+    });
+
+    let month = '0';
+    const inputMonth = document.getElementById("admin__stats-input-month");
+    inputMonth.addEventListener('change', (e) => {
+        e.preventDefault();
+        if (inputMonth.value !== "0") {
+            month = parseInt(inputMonth.value);
+        } else {
+            month = "0";
+        }
+    });
+
+    let day = '0';
+    const inputDay = document.getElementById("admin__stats-input-day");
+    inputDay.addEventListener('change', (e) => {
+        e.preventDefault();
+        if (inputDay.value !== "0") {
+            day = parseInt(inputDay.value);
+        } else {
+            day = "0";
+        }
+    });
+
+    // Show Chart Button
     btnShowChart.addEventListener('click', (e) => {
         e.preventDefault();
 
-        doPost('http://localhost:5000/api/general/estadistics', {
-            "type": "year",
-            "year": 2020
-        })
-        .then((data) => {
-            console.log(data);
-            const escale = data.status[1].escale;
-            console.log(escale)
-            const months = Object.keys(data.status[0])
-            console.log(months)
-            let values = Object.values(data.status[0])
-            values = [
-                ...values,
-                escale
-            ]
+        let _datos = {
+            "type": methric,
+            "year": year,
+            "month": month,
+            "day": day
+        };
 
-            console.log(values)
-            console.log(values.map((value, index) => value))
-            const ctx = document.getElementById('myChart').getContext('2d');
-            const myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: months.map((month, index) => month),
-                    datasets: [{
-                        label: '# of Votes',
-                        data: values.map((value, index) => value),
-                        backgroundColor: [
-                            'rgba(153, 102, 255, 0.2)',
-                        ],
-                        borderColor: [
-                            'rgba(153, 102, 255, 1)',
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
+        console.log(route);
+        console.log(_datos);
+        if (route !== "0") {
+            doPost(route, _datos)
+            .then((data) => {
+                console.log(data);
+                const escale = data.status[1].escale;
+                console.log(escale)
+                const months = Object.keys(data.status[0])
+                console.log(months)
+                let values = Object.values(data.status[0])
+                values = [
+                    ...values,
+                    escale
+                ]
+    
+                console.log(values)
+                console.log(values.map((value, index) => value))
+                const ctx = document.getElementById('myChart').getContext('2d');
+                if (myChart) {
+                    myChart.destroy();
+                }
+                myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: months.map((month) => month),
+                        datasets: [{
+                            label: '# of Votes',
+                            data: values.map((value) => value),
+                            backgroundColor: [
+                                'rgba(153, 102, 255, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgba(153, 102, 255, 1)',
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
                         }
                     }
-                }
+                });
             });
-        });
-
+        }
     })
 })

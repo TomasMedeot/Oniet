@@ -1,5 +1,4 @@
 __pycache__/
 *.pyc
 *settings.xml
-.gitignore
 Oniet.code-workspace
