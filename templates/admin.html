@@ -12,11 +12,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/stats.css') }}" />
     <title id="login__title">Login Admin</title>
+    <script src="{{ url_for('static', filename='js/jquery/jquery-3.6.1.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/chart/chart.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/login.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
 </head>
-<body>
+<body class="d-flex flex-column mh-100 m-0">
     <header id="login__header">
         <div id="login__header-div">
             <img id="login__logo" src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
@@ -79,9 +80,11 @@
 
             </ul>
 
-            <!-- Button trigger Form -->
+
+
+            <!-- Button trigger Add Form -->
             <button type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#formModal">Agregar</button>
-            <!-- Form -->
+            <!-- Add Form -->
             <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -116,6 +119,7 @@
                 </div>
             </div>
 
+            
             <!-- Usuarios -->
             <h4 class="mt-4">Usuarios</h4>
             <ul class="list-group">
@@ -177,77 +181,81 @@
     </main>
     <main id="admin__stats">
         <div>
-            <h2>Hola, {usuario}</h2>
+            <h2 id="admin__stats-hello">Hola, {usuario}</h2>
             <h4 class="mt-4">Stats</h4>
-            <label for="type"></label>
-            <select name="type" id="type">
-                <option value="0">-- type --</option>
-                <option value="General">General</option>
-                <option value="Host">Host</option>
+            <!-- Input Route -->
+            <label for="route"></label>
+            <select name="route" id="admin__stats-input-route">
+                <option value="0">-- route --</option>
+                <option value="general">general</option>
+                <option value="host">host</option>
             </select>
-            <select name="methric" id="methric">
+            <!-- Input Methric -->
+            <select name="methric" id="admin__stats-input-methric">
                 <option value="0">-- methric --</option>
                 <option value="year">year</option>
                 <option value="month">month</option>
                 <option value="day">day</option>
             </select>
-            <!-- Year -->
-            <input type="number">
-            <select name="month" id="month">
+            <!-- Input Year -->
+            <input type="number" id="admin__stats-input-year" placeholder="year" hidden>
+            <!-- Input Month -->
+            <select name="month" id="admin__stats-input-month" hidden>
                 <option value="0">-- month --</option>
-                <option value="january">january</option>
-                <option value="february">february</option>
-                <option value="march">march</option>
-                <option value="april">april</option>
-                <option value="may">may</option>
-                <option value="june">june</option>
-                <option value="july">july</option>
-                <option value="august">august</option>
-                <option value="september">september</option>
-                <option value="october">october</option>
-                <option value="november">november</option>
-                <option value="december">december</option>
+                <option value=1>january</option>
+                <option value=2>february</option>
+                <option value=3>march</option>
+                <option value=4>april</option>
+                <option value=5>may</option>
+                <option value=6>june</option>
+                <option value=7>july</option>
+                <option value=8>august</option>
+                <option value=9>september</option>
+                <option value=10>october</option>
+                <option value=11>november</option>
+                <option value=12>december</option>
             </select>
-            <select name="day" id="day">
-                <option value="0">-- day --</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
-                <option value="21">21</option>
-                <option value="22">22</option>
-                <option value="23">23</option>
-                <option value="24">24</option>
-                <option value="25">25</option>
-                <option value="26">26</option>
-                <option value="27">27</option>
-                <option value="28">28</option>
-                <option value="29">29</option>
-                <option value="30">30</option>
-                <option value="31">31</option>
+            <!-- Input Day -->
+            <select name="day" id="admin__stats-input-day" hidden>
+                <option value=0>-- day --</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+                <option value=5>5</option>
+                <option value=6>6</option>
+                <option value=7>7</option>
+                <option value=8>8</option>
+                <option value=9>9</option>
+                <option value=10>10</option>
+                <option value=11>11</option>
+                <option value=12>12</option>
+                <option value=13>13</option>
+                <option value=14>14</option>
+                <option value=15>15</option>
+                <option value=16>16</option>
+                <option value=17>17</option>
+                <option value=18>18</option>
+                <option value=19>19</option>
+                <option value=20>20</option>
+                <option value=21>21</option>
+                <option value=22>22</option>
+                <option value=23>23</option>
+                <option value=24>24</option>
+                <option value=25>25</option>
+                <option value=26>26</option>
+                <option value=27>27</option>
+                <option value=28>28</option>
+                <option value=29>29</option>
+                <option value=30>30</option>
+                <option value=31>31</option>
             </select>
             <button type="button" id="admin__stats-btn-show-chart">Show Chart</button>
             <!-- <select name="" id="">
                 <option value=""></option>
             </select> -->
             <div class="w-50 mh-25 mx-auto mt-5">
-                <canvas id="myChart" width="400" height="100"></canvas>
+                <canvas id="myChart" width="400" height="300"></canvas>
             </div>
         </div>
     </main>
@@ -256,5 +264,129 @@
             Desarrollado por Basa2 Team :).
         </div>
     </footer>
+    <script>
+        const doGet = async(url = '') => {
+            const response = await fetch(url, {
+                method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                headers: {"Content-type": "application/json; charset=UTF-8"},
+            });
+            return response.json(); // parses JSON response into native JavaScript objects
+        }
+        
+        const doPost = async(url = '', data = {}) => {
+            const response = await fetch(url, {
+                method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                headers: {"Content-type": "application/json; charset=UTF-8"},
+                body: JSON.stringify(data), // body data type must match "Content-Type" header
+            });
+            return response.json(); // parses JSON response into native JavaScript objects
+        }
+
+        const updateProduct = (id) => {
+
+            const formName = document.getElementById(`admin__form-update-input-name${id}`);
+            const formDesc = document.getElementById(`admin__form-update-input-desc${id}`);
+            const formPrice = document.getElementById(`admin__form-update-input-price${id}`);
+
+            const name = formName.value;
+            const desc = formDesc.value;
+            const price = formPrice.value;
+
+            console.log("Click updateProduct")
+            console.log(id);
+
+
+            let _datos = {
+                id: id,
+                name: name,
+                description: desc,
+                price: price,
+                action: "update"
+            }
+
+            console.log(_datos);
+
+            doPost('http://localhost:5000/api/catalog', _datos)
+            .then((data) => {
+                console.log(data);
+                // Fill catalog dinamically
+                doGet('http://localhost:5000/api/catalog')
+                .then((data) => {
+                    console.log(data);
+                    const catalog_list = document.getElementById("admin__catalog-list");
+                    catalog_list.innerHTML = "";
+
+                    const catalog = data.catalog
+                    catalog.forEach(product => {
+                        const li = document.createElement("li");
+                        li.className = "list-group-item";
+                        li.innerHTML = `
+                            <div class="row">
+                                <div class="col-10">
+                                    ${product.name} ${product.price}
+                                </div>
+                                <div class="col-1">
+                                    <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#formModalUpdate" onclick="updateProduct(${product.id})">Editar</button>
+                                </div>
+                                <div class="col-1">
+                                <button class="btn btn-danger mx-2" onclick="deleteProduct(${product.id})">Borrar</button>
+                                </div>
+                            </div>
+                        `
+                        catalog_list.appendChild(li);
+                    })
+                });
+            });
+
+            $('#formModalUpdate').modal('hide');
+            $('#formModalUpdate').hide();
+            $('.modal-backdrop').hide();
+            window.location.reload();            
+            // $('.modal-backdrop').removeClass('show');
+            // formName.value = "";
+            // formDesc.value = "";
+            // formPrice.value = "";
+        }
+
+        const deleteProduct = (id) => {
+            console.log(id);
+
+            doPost("http://localhost:5000/api/catalog", {
+                "action": "delete",
+                "id": id
+            })
+            .then((data) => {
+                console.log(data);
+                // Fill catalog dinamically
+                doGet('http://localhost:5000/api/catalog')
+                    .then((data) => {
+                        const catalog_list = document.getElementById("admin__catalog-list");
+                        catalog_list.innerHTML = "";
+
+                        const catalog = data.catalog
+                        catalog.forEach(product => {
+                            const li = document.createElement("li");
+                            li.className = "list-group-item";
+                            li.innerHTML = `
+                                <div class="row">
+                                    <div class="col-10">
+                                        ${product.name} ${product.price}
+                                    </div>
+                                    <div class="col-1">
+                                        <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#formModalUpdate" onclick="updateProduct(${product.id})">Editar</button>
+                                    </div>
+                                    <div class="col-1">
+                                    <button class="btn btn-danger mx-2" onclick="deleteProduct(${product.id})">Borrar</button>
+                                    </div>
+                                </div>
+                            `
+                            catalog_list.appendChild(li);
+                        })
+                    });
+            });
+
+            window.location.reload();
+        }
+    </script>
 </body>
 </html>
