@@ -12,12 +12,12 @@ class DataBase:
     #Is the conection to the database for insert , update or delete
     def datainsert(self,accion:str):
         '''This function need the sql instruction, returns 'msj':'DB correctly'//'DB error' '''
-        #try:
-        self.cursor.execute(accion)
-        self.conn.commit()
-        return {'msj':'DB correctly'}
-        #except:
-        #    return {'msj':'DB error'}
+        try:
+            self.cursor.execute(accion)
+            self.conn.commit()
+            return {'msj':'DB correctly'}
+        except:
+            return {'msj':'DB error'}
 
     #Is the connection to the database for read information
     def datasearch(self,accion:str):
