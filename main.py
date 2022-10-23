@@ -84,7 +84,6 @@ def estadistics_product():
         return {'status':context}
     elif request.method == 'POST':
         rq = request.get_json()
-        print(db.datainsert(db.querys({'action':'add_catalog_estadistics','id':rq['id']})))
         return {'status':'ok'}
 
 #Api catalog
