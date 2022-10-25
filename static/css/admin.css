@@ -31,8 +31,34 @@
     width: 50%;
 }
 
-/* .admin__stats-row {
+.admin__stats-row-header {
     display: flex;
     justify-content: space-between;
-    text-align: left;
-} */
+}
+
+.admin__stats-row-graph {
+    margin: 0px auto;
+    width: 70%;
+}
+
+.admin__stats-row-title {
+    margin-top: 1em;
+}
+
+.admin__stats-row-content {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1em;
+    /* margin-left: 5.5em; */
+    margin-top: 1em;
+    width: 60%;
+}
+
+.admin__stats-input {
+    /* margin-left: 1em; */
+    margin-right: 1em;
+}
+
+.admin__stats-input-year {
+    width: 90px;
+}
