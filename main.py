@@ -7,6 +7,7 @@ from admin_users.Login.login import login
 from admin_users.Register.register import register, register_temp
 from admin_users.Resetp.resetp import reset
 
+
 server = Flask('server')
 cors = CORS(server)
 conf = xml()
