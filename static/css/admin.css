@@ -22,3 +22,17 @@
     padding-top: 3em;
     width: 80%;
 }
+
+
+/* ADMIN STATS */
+
+.admin__stats-container {
+    margin: 0px auto;
+    width: 50%;
+}
+
+/* .admin__stats-row {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+} */

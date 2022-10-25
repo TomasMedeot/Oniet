@@ -33,6 +33,7 @@ def admin ():
         data = request.get_json()
         if data['action']=='login':
             response = login(data,db)
+            print(response)
             if response != None:
                 return {'logged':True,'user':response[0]}
             else:

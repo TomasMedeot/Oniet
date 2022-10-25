@@ -117,29 +117,31 @@
     <main id="admin__stats">
         <div class="container">
             <h4 class="mt-4">Estadísticas</h4>
-            <!-- Input Route -->
-            <label for="route"></label>
-            <select name="route" id="admin__stats-input-route">
-                <option value="0">-- Tipo --</option>
-                <option value="general">General</option>
-                <option value="host">Host</option>
-                <option value="product">Producto</option>
-            </select>
-            <!-- Input Methric -->
-            <select name="methric" id="admin__stats-input-methric" hidden>
-                <option value="0">-- Métrica --</option>
-                <option value="year">Año</option>
-                <option value="month">Mes</option>
-                <option value="day">Día</option>
-            </select>
-            <!-- Input Comparation -->
-            <select name="comparation" id="admin__stats-input-comparation" hidden>
-                <option value="0">-- ¿Comparación? --</option>
-                <option value="no">No</option>
-                <option value="yes">Si</option>
-            </select>
-            <div>
-                <div>
+            <div class="admin__stats-container">
+                <div class="admin__stats-row">
+                    <!-- Input Route -->
+                    <label for="route"></label>
+                    <select name="route" id="admin__stats-input-route">
+                        <option value="0">-- Tipo --</option>
+                        <option value="general">General</option>
+                        <option value="host">Host</option>
+                        <option value="product">Producto</option>
+                    </select>
+                    <!-- Input Methric -->
+                    <select name="methric" id="admin__stats-input-methric" hidden>
+                        <option value="0">-- Métrica --</option>
+                        <option value="year">Año</option>
+                        <option value="month">Mes</option>
+                        <option value="day">Día</option>
+                    </select>
+                    <!-- Input Comparation -->
+                    <select name="comparation" id="admin__stats-input-comparation" hidden>
+                        <option value="0">-- ¿Comparación? --</option>
+                        <option value="no">No</option>
+                        <option value="yes">Si</option>
+                    </select>
+                </div>
+                <div class="admin__stats-row">
                     <!-- Input Year -->
                     <input type="number" id="admin__stats-input-year" placeholder="Año" hidden>
                     <!-- Input Month -->
@@ -194,7 +196,7 @@
                         <option value=31>31</option>
                     </select>
                 </div>
-                <div>
+                <div class="admin__stats-row">
                     <!-- Input YearTwo -->
                     <input type="number" id="admin__stats-input-year-two" placeholder="Año" hidden>
                     <!-- Input MonthTwo -->
