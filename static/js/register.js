@@ -33,7 +33,7 @@ window.addEventListener('load', () => {
 
         // Example POST method implementation:
         
-        postData('http://localhost:5000/admin', {
+        postData('http://192.168.2.251/admin', {
             "action": "register",
             "name": name.value, 
             "email": email.value, 

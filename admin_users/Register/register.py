@@ -12,6 +12,5 @@ def register_temp(data,database,mail,password):
     database.datainsert(database.querys(data))
     data['action']='read_id_temp_user'
     request = database.datasearch(database.querys(data))
-    print(request)
     response = sendmail(mail,data['email'],password,'register',request[0][0])
     return response

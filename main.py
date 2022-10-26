@@ -6,10 +6,12 @@ from estadistics.estadistics import calcule, calcule_host , calcule_product
 from admin_users.Login.login import login
 from admin_users.Register.register import register, register_temp
 from admin_users.Resetp.resetp import reset
-
+from flask_cors import CORS
 
 server = Flask('server')
-cors = CORS(server)
+cors = CORS(server, resources={r"/api/*": {"origins": "*"}})
+'''cors = CORS(server)
+cors = CORS(server)'''
 conf = xml()
 db = DataBase(conf)
 
@@ -57,12 +59,16 @@ def verif(mail,id):
         return redirect('/admin')
 
 #Api activity
-@server.route('/api/add',methods=['POST'])
+@server.route('/api/add',methods=['POST','OPTIONS'])
 def actividty_add():
-    rq = request.get_json()
+    print('1' , request)
+    print('2' , request.get_data())
+    #print('3' , request.get_data()['email'])
+    '''rq = request.get_json()
     rq['action']='add_activity'
     context= db.datainsert(db.querys(rq))
-    return {'id':request.get_json(),'status':context}
+    return {'id':request.get_json(),'status':context}'''
+    return {'id':'a'}
 
 #Api general stadistics
 @server.route('/api/general/estadistics',methods=['POST'])
@@ -116,5 +122,5 @@ def catalog ():
 
 
 if __name__ == '__main__':
-    #server.run(debug=True, host='192.168.60.12')
-    server.run(debug=True, host='localhost')
+    server.run(debug=True, host='192.168.2.251',port=80)
+    #server.run(debug=True, host='localhost')

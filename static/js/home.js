@@ -10,7 +10,7 @@ window.addEventListener('load', () => {
     }
 
 
-    doGet('http://localhost:5000/api/catalog')
+    doGet('http://192.168.2.251/api/catalog')
     .then((data) => {
         const catalog_list = document.getElementById("home__catalog-list");
         catalog_list.innerHTML = "";

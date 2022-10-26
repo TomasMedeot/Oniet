@@ -21,8 +21,8 @@ CREATE TABLE ADMIN_TEMP(
 DROP TABLE IF EXISTS ACTIVITY;
 CREATE TABLE ACTIVITY(
     ID int not null auto_increment,
-	NAME varchar(20)NOT NULL,
-	MAIL varchar(30) NOT NULL,
+	NAME varchar(40)NOT NULL,
+	MAIL varchar(60) NOT NULL,
 	SEX varchar(30) NOT NULL,
     HOUR int NOT NULL,
     DAY int NOT NULL,
