@@ -23,7 +23,10 @@ footer{
 }
 
 /* Main */
-
+.home__catalog-btn-detail {
+    margin-top: 1em;
+    width: 8em;
+}
 
 /* Footer */
 #home__footer__div {
@@ -31,4 +34,17 @@ footer{
     color: white;
     padding: 2em;
     text-align: center;
+}
+
+
+@media(min-width: 576px) {
+    .home__catalog-btn-detail {
+        margin-top: 0px;
+    }
+}
+
+@media(min-width: 768px) {
+    .home__catalog-btn-detail {
+        margin-left: auto;
+    }
 }
