@@ -119,13 +119,13 @@ window.addEventListener('load', () => {
         
 
         if (email !== '' && pass !== '') {
-            doPost('http://localhost:5000/admin', _datos)
+            doPost('http://192.168.2.251/admin', _datos)
             .then((data) => {
                 if (data.logged) {
                     login(data);
 
                     // Fill catalog dinamically
-                    doGet('http://localhost:5000/api/catalog')
+                    doGet('http://192.168.2.251/api/catalog')
                     .then((data) => {
                         const catalog_list = document.getElementById("admin__catalog-list");
                         catalog_list.innerHTML = "";
@@ -227,10 +227,10 @@ window.addEventListener('load', () => {
         
 
         if (name !== '' && desc !== '' && price !== '') {
-            doPost('http://localhost:5000/api/catalog', _datos)
+            doPost('http://192.168.2.251/api/catalog', _datos)
             .then((data) => {
                 // Fill catalog dinamically
-                doGet('http://localhost:5000/api/catalog')
+                doGet('http://192.168.2.251/api/catalog')
                 .then((data) => {
                     const catalog_list = document.getElementById("admin__catalog-list");
                     catalog_list.innerHTML = "";
@@ -272,7 +272,7 @@ window.addEventListener('load', () => {
     inputRoute.addEventListener('change', (e) => {
         e.preventDefault();
         if (inputRoute.value == "host") {
-            route = "http://localhost:5000/api/host/estadistics";
+            route = "http://192.168.2.251/api/host/estadistics";
 
             if (comparation === "no") {
                 if (methric === "year") {
@@ -343,7 +343,7 @@ window.addEventListener('load', () => {
             document.getElementById("admin__stats-input-methric").hidden = false
             document.getElementById("admin__stats-input-comparation").hidden = false
         } else if (inputRoute.value == "general") {
-            route = "http://localhost:5000/api/general/estadistics";
+            route = "http://192.168.2.251/api/general/estadistics";
 
             if (comparation === "no") {
                 if (methric === "year") {
@@ -414,7 +414,7 @@ window.addEventListener('load', () => {
             document.getElementById("admin__stats-input-methric").hidden = false
             document.getElementById("admin__stats-input-comparation").hidden = false
         } else if (inputRoute.value == "product") {
-            route = "http://localhost:5000/api/product/estadistics";
+            route = "http://192.168.2.251/api/product/estadistics";
 
             document.getElementById("admin__stats-input-methric").hidden = true
             document.getElementById("admin__stats-input-comparation").hidden = true

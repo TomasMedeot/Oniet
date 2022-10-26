@@ -46,7 +46,7 @@ window.addEventListener('load', () => {
                 adminHeader.classList.add('show');
     
                 // Fill catalog dinamically
-                doGet('http://localhost:5000/api/catalog')
+                doGet('http://192.168.2.251/api/catalog')
                 .then((data) => {
                     const catalog_list = document.getElementById("admin__catalog-list");
                     catalog_list.innerHTML = "";
@@ -152,7 +152,7 @@ window.addEventListener('load', () => {
         adminHello.innerHTML = `Hola, ${name}`;
 
         // Fill catalog dinamically
-        doGet('http://localhost:5000/api/catalog')
+        doGet('http://192.168.2.251/api/catalog')
         .then((data) => {
             const catalog_list = document.getElementById("admin__catalog-list");
             catalog_list.innerHTML = "";
@@ -225,7 +225,7 @@ window.addEventListener('load', () => {
         adminStatsHello.innerHTML = `Hola, ${name}`
 
         // Fill catalog dinamically
-        doGet('http://localhost:5000/api/catalog')
+        doGet('http://192.168.2.251/api/catalog')
         .then((data) => {
             const catalog_list = document.getElementById("admin__catalog-list");
             catalog_list.innerHTML = "";

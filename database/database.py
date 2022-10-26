@@ -17,6 +17,7 @@ class DataBase:
             self.conn.commit()
             return {'msj':'DB correctly'}
         except:
+            print('error')
             return {'msj':'DB error'}
 
     #Is the connection to the database for read information
