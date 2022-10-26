@@ -114,5 +114,5 @@ def catalog ():
 
 
 if __name__ == '__main__':
-    #server.run(debug=True, host='192.168.60.12')
+    #server.run(debug=True, host='192.168.2.247')
     server.run(debug=True, host='localhost')
