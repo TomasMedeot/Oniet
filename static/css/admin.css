@@ -5,8 +5,6 @@
 }
 
 #admin__logo {
-    background-color: white;
-    /* margin: 1em; */
     width: 6em;
 }
 
@@ -16,9 +14,46 @@
 }
 
 #admin__div {
-    /* text-align: center; */
     margin: 0px auto;
     padding-bottom: 3em;
     padding-top: 3em;
     width: 80%;
+}
+
+
+/* ADMIN STATS */
+
+.admin__stats-container {
+    margin: 0px auto;
+    width: 50%;
+}
+
+.admin__stats-row-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin__stats-row-graph {
+    margin: 0px auto;
+    width: 70%;
+}
+
+.admin__stats-row-title {
+    margin-top: 1em;
+}
+
+.admin__stats-row-content {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    width: 60%;
+}
+
+.admin__stats-input {
+    margin-right: 1em;
+}
+
+.admin__stats-input-year {
+    width: 90px;
 }

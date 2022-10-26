@@ -7,6 +7,7 @@ from admin_users.Login.login import login
 from admin_users.Register.register import register, register_temp
 from admin_users.Resetp.resetp import reset
 
+
 server = Flask('server')
 cors = CORS(server)
 conf = xml()
@@ -33,6 +34,7 @@ def admin ():
         data = request.get_json()
         if data['action']=='login':
             response = login(data,db)
+            print(response)
             if response != None:
                 return {'logged':True,'user':response[0]}
             else:

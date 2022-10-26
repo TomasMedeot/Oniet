@@ -19,11 +19,39 @@ window.addEventListener('load', () => {
     const btnShowChart = document.getElementById("admin__stats-btn-show-chart");
     let myChart;
 
+    const ctx = document.getElementById('myChart').getContext('2d');
+    if (myChart) {
+        myChart.destroy();
+    }
+    myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+            datasets: [{
+                label: `Example`,
+                data: [],
+                backgroundColor: [
+                    'rgba(153, 102, 255, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(153, 102, 255, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
 
     const login = (data) => {
         const {user} = data;
 
-        console.log(user);
         localStorage.setItem('logged', true);
         localStorage.setItem('name', user[1]);
         localStorage.setItem('path', 'admin');
@@ -89,13 +117,10 @@ window.addEventListener('load', () => {
             action: "login"
         }
         
-        console.log(_datos);
 
         if (email !== '' && pass !== '') {
             doPost('http://localhost:5000/admin', _datos)
             .then((data) => {
-                console.log(data);
-                console.log(data.user[1]);
                 if (data.logged) {
                     login(data);
 
@@ -176,7 +201,6 @@ window.addEventListener('load', () => {
         const desc = formDesc.value;
         const price = formPrice.value;
 
-        console.log("Click add")
 
         if (name !== '') {
             document.getElementById("admin__form-name-required").hidden = true
@@ -201,12 +225,10 @@ window.addEventListener('load', () => {
             action: "add"
         }
         
-        console.log(_datos);
 
         if (name !== '' && desc !== '' && price !== '') {
             doPost('http://localhost:5000/api/catalog', _datos)
             .then((data) => {
-                console.log(data);
                 // Fill catalog dinamically
                 doGet('http://localhost:5000/api/catalog')
                 .then((data) => {
@@ -252,10 +274,142 @@ window.addEventListener('load', () => {
         if (inputRoute.value == "host") {
             route = "http://localhost:5000/api/host/estadistics";
 
+            if (comparation === "no") {
+                if (methric === "year") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = true
+                    document.getElementById("admin__stats-input-year").hidden = false
+                    document.getElementById("admin__stats-input-year-two").hidden = true
+    
+                    document.getElementById("admin__stats-input-month").hidden = true
+                    document.getElementById("admin__stats-input-month-two").hidden = true
+                    document.getElementById("admin__stats-input-day").hidden = true
+                    document.getElementById("admin__stats-input-day-two").hidden = true
+                } else if (methric === "month") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = true
+                    document.getElementById("admin__stats-input-year").hidden = false
+                    document.getElementById("admin__stats-input-year-two").hidden = true
+                    document.getElementById("admin__stats-input-month").hidden = false
+                    document.getElementById("admin__stats-input-month-two").hidden = true
+    
+                    document.getElementById("admin__stats-input-day").hidden = true
+                    document.getElementById("admin__stats-input-day-two").hidden = true
+    
+                } else if (methric === "day") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-input-year").hidden = false
+                    document.getElementById("admin__stats-input-month").hidden = false
+                    document.getElementById("admin__stats-input-day").hidden = false
+                    
+                    document.getElementById("admin__stats-row-title-two").hidden = true
+                    document.getElementById("admin__stats-input-year-two").hidden = true
+                    document.getElementById("admin__stats-input-month-two").hidden = true
+                    document.getElementById("admin__stats-input-day-two").hidden = true
+                }
+            } else if (comparation === "yes") {
+                if (methric === "year") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = false
+                    document.getElementById("admin__stats-input-year").hidden = false
+                    document.getElementById("admin__stats-input-year-two").hidden = false
+    
+                    document.getElementById("admin__stats-input-month").hidden = true
+                    document.getElementById("admin__stats-input-month-two").hidden = true
+                    document.getElementById("admin__stats-input-day").hidden = true
+                    document.getElementById("admin__stats-input-day-two").hidden = true
+                } else if (methric === "month") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = false
+                    document.getElementById("admin__stats-input-year").hidden = false
+                    document.getElementById("admin__stats-input-year-two").hidden = false
+                    document.getElementById("admin__stats-input-month").hidden = false
+                    document.getElementById("admin__stats-input-month-two").hidden = false
+    
+                    document.getElementById("admin__stats-input-day").hidden = true
+                    document.getElementById("admin__stats-input-day-two").hidden = true
+                } else if (methric === "day") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = false
+                    document.getElementById("admin__stats-input-year").hidden = false
+                    document.getElementById("admin__stats-input-year-two").hidden = false
+                    document.getElementById("admin__stats-input-month").hidden = false
+                    document.getElementById("admin__stats-input-month-two").hidden = false
+                    document.getElementById("admin__stats-input-day").hidden = false
+                    document.getElementById("admin__stats-input-day-two").hidden = false
+                }
+            }
+
             document.getElementById("admin__stats-input-methric").hidden = false
             document.getElementById("admin__stats-input-comparation").hidden = false
         } else if (inputRoute.value == "general") {
             route = "http://localhost:5000/api/general/estadistics";
+
+            if (comparation === "no") {
+                if (methric === "year") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-input-year").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = true
+                    document.getElementById("admin__stats-input-year-two").hidden = true
+    
+                    document.getElementById("admin__stats-input-month").hidden = true
+                    document.getElementById("admin__stats-input-month-two").hidden = true
+                    document.getElementById("admin__stats-input-day").hidden = true
+                    document.getElementById("admin__stats-input-day-two").hidden = true
+                } else if (methric === "month") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = true
+                    document.getElementById("admin__stats-input-year").hidden = false
+                    document.getElementById("admin__stats-input-year-two").hidden = true
+                    document.getElementById("admin__stats-input-month").hidden = false
+                    document.getElementById("admin__stats-input-month-two").hidden = true
+    
+                    document.getElementById("admin__stats-input-day").hidden = true
+                    document.getElementById("admin__stats-input-day-two").hidden = true
+    
+                } else if (methric === "day") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-input-year").hidden = false
+                    document.getElementById("admin__stats-input-month").hidden = false
+                    document.getElementById("admin__stats-input-day").hidden = false
+
+                    document.getElementById("admin__stats-row-title-two").hidden = true
+                    document.getElementById("admin__stats-input-year-two").hidden = true
+                    document.getElementById("admin__stats-input-month-two").hidden = true
+                    document.getElementById("admin__stats-input-day-two").hidden = true
+                }
+            } else if (comparation === "yes") {
+                if (methric === "year") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = false
+                    document.getElementById("admin__stats-input-year").hidden = false
+                    document.getElementById("admin__stats-input-year-two").hidden = false
+    
+                    document.getElementById("admin__stats-input-month").hidden = true
+                    document.getElementById("admin__stats-input-month-two").hidden = true
+                    document.getElementById("admin__stats-input-day").hidden = true
+                    document.getElementById("admin__stats-input-day-two").hidden = true
+                } else if (methric === "month") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = false
+                    document.getElementById("admin__stats-input-year").hidden = false
+                    document.getElementById("admin__stats-input-year-two").hidden = false
+                    document.getElementById("admin__stats-input-month").hidden = false
+                    document.getElementById("admin__stats-input-month-two").hidden = false
+    
+                    document.getElementById("admin__stats-input-day").hidden = true
+                    document.getElementById("admin__stats-input-day-two").hidden = true
+                } else if (methric === "day") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = false
+                    document.getElementById("admin__stats-input-year").hidden = false
+                    document.getElementById("admin__stats-input-year-two").hidden = false
+                    document.getElementById("admin__stats-input-month").hidden = false
+                    document.getElementById("admin__stats-input-month-two").hidden = false
+                    document.getElementById("admin__stats-input-day").hidden = false
+                    document.getElementById("admin__stats-input-day-two").hidden = false
+                }
+            }
 
             document.getElementById("admin__stats-input-methric").hidden = false
             document.getElementById("admin__stats-input-comparation").hidden = false
@@ -264,11 +418,31 @@ window.addEventListener('load', () => {
 
             document.getElementById("admin__stats-input-methric").hidden = true
             document.getElementById("admin__stats-input-comparation").hidden = true
+
+            document.getElementById("admin__stats-row-title").hidden = true
+            document.getElementById("admin__stats-input-year").hidden = true
+            document.getElementById("admin__stats-input-month").hidden = true
+            document.getElementById("admin__stats-input-day").hidden = true
+            
+            document.getElementById("admin__stats-row-title-two").hidden = true
+            document.getElementById("admin__stats-input-year-two").hidden = true
+            document.getElementById("admin__stats-input-month-two").hidden = true
+            document.getElementById("admin__stats-input-day-two").hidden = true
         }else {
             route = "0";
 
             document.getElementById("admin__stats-input-methric").hidden = true
             document.getElementById("admin__stats-input-comparation").hidden = true
+            
+            document.getElementById("admin__stats-row-title").hidden = true
+            document.getElementById("admin__stats-input-year").hidden = true
+            document.getElementById("admin__stats-input-month").hidden = true
+            document.getElementById("admin__stats-input-day").hidden = true
+            
+            document.getElementById("admin__stats-row-title-two").hidden = true
+            document.getElementById("admin__stats-input-year-two").hidden = true
+            document.getElementById("admin__stats-input-month-two").hidden = true
+            document.getElementById("admin__stats-input-day-two").hidden = true
         }
     });
 
@@ -280,6 +454,8 @@ window.addEventListener('load', () => {
             methric = inputMethric.value;
             if (comparation === "no") {
                 if (methric === "year") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = true
                     document.getElementById("admin__stats-input-year").hidden = false
                     document.getElementById("admin__stats-input-year-two").hidden = true
     
@@ -288,6 +464,8 @@ window.addEventListener('load', () => {
                     document.getElementById("admin__stats-input-day").hidden = true
                     document.getElementById("admin__stats-input-day-two").hidden = true
                 } else if (methric === "month") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = true
                     document.getElementById("admin__stats-input-year").hidden = false
                     document.getElementById("admin__stats-input-year-two").hidden = true
                     document.getElementById("admin__stats-input-month").hidden = false
@@ -297,16 +475,20 @@ window.addEventListener('load', () => {
                     document.getElementById("admin__stats-input-day-two").hidden = true
     
                 } else if (methric === "day") {
+                    document.getElementById("admin__stats-row-title").hidden = false
                     document.getElementById("admin__stats-input-year").hidden = false
                     document.getElementById("admin__stats-input-month").hidden = false
                     document.getElementById("admin__stats-input-day").hidden = false
-
-                    document.getElementById("admin__stats-input-year-two").hidden = false
-                    document.getElementById("admin__stats-input-month-two").hidden = false
-                    document.getElementById("admin__stats-input-day").hidden = false
+                    
+                    document.getElementById("admin__stats-row-title-two").hidden = true
+                    document.getElementById("admin__stats-input-year-two").hidden = true
+                    document.getElementById("admin__stats-input-month-two").hidden = true
+                    document.getElementById("admin__stats-input-day-two").hidden = true
                 }
             } else if (comparation === "yes") {
                 if (methric === "year") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = false
                     document.getElementById("admin__stats-input-year").hidden = false
                     document.getElementById("admin__stats-input-year-two").hidden = false
     
@@ -315,6 +497,8 @@ window.addEventListener('load', () => {
                     document.getElementById("admin__stats-input-day").hidden = true
                     document.getElementById("admin__stats-input-day-two").hidden = true
                 } else if (methric === "month") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = false
                     document.getElementById("admin__stats-input-year").hidden = false
                     document.getElementById("admin__stats-input-year-two").hidden = false
                     document.getElementById("admin__stats-input-month").hidden = false
@@ -323,6 +507,8 @@ window.addEventListener('load', () => {
                     document.getElementById("admin__stats-input-day").hidden = true
                     document.getElementById("admin__stats-input-day-two").hidden = true
                 } else if (methric === "day") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = false
                     document.getElementById("admin__stats-input-year").hidden = false
                     document.getElementById("admin__stats-input-year-two").hidden = false
                     document.getElementById("admin__stats-input-month").hidden = false
@@ -334,9 +520,15 @@ window.addEventListener('load', () => {
 
         } else {
             methric = "0";
+            document.getElementById("admin__stats-row-title").hidden = true
             document.getElementById("admin__stats-input-year").hidden = true
             document.getElementById("admin__stats-input-month").hidden = true
             document.getElementById("admin__stats-input-day").hidden = true
+            
+            document.getElementById("admin__stats-row-title-two").hidden = true
+            document.getElementById("admin__stats-input-year-two").hidden = true
+            document.getElementById("admin__stats-input-month-two").hidden = true
+            document.getElementById("admin__stats-input-day-two").hidden = true
         }
     });
 
@@ -347,8 +539,9 @@ window.addEventListener('load', () => {
         if (inputComparation.value !== "0") {
             comparation = inputComparation.value;
             if (comparation === "no") {
-                console.log("entered in no")
                 if (methric === "year") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = true
                     document.getElementById("admin__stats-input-year").hidden = false
                     document.getElementById("admin__stats-input-year-two").hidden = true
     
@@ -357,6 +550,8 @@ window.addEventListener('load', () => {
                     document.getElementById("admin__stats-input-day").hidden = true
                     document.getElementById("admin__stats-input-day-two").hidden = true
                 } else if (methric === "month") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = true
                     document.getElementById("admin__stats-input-year").hidden = false
                     document.getElementById("admin__stats-input-year-two").hidden = true
                     document.getElementById("admin__stats-input-month").hidden = false
@@ -366,6 +561,8 @@ window.addEventListener('load', () => {
                     document.getElementById("admin__stats-input-day-two").hidden = true
     
                 } else if (methric === "day") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = true
                     document.getElementById("admin__stats-input-year").hidden = false
                     document.getElementById("admin__stats-input-year-two").hidden = true
                     document.getElementById("admin__stats-input-month").hidden = false
@@ -375,6 +572,8 @@ window.addEventListener('load', () => {
                 }
             } else if (comparation === "yes") {
                 if (methric === "year") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = false
                     document.getElementById("admin__stats-input-year").hidden = false
                     document.getElementById("admin__stats-input-year-two").hidden = false
     
@@ -383,6 +582,8 @@ window.addEventListener('load', () => {
                     document.getElementById("admin__stats-input-day").hidden = true
                     document.getElementById("admin__stats-input-day-two").hidden = true
                 } else if (methric === "month") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = false
                     document.getElementById("admin__stats-input-year").hidden = false
                     document.getElementById("admin__stats-input-year-two").hidden = false
                     document.getElementById("admin__stats-input-month").hidden = false
@@ -392,6 +593,8 @@ window.addEventListener('load', () => {
                     document.getElementById("admin__stats-input-day-two").hidden = true
     
                 } else if (methric === "day") {
+                    document.getElementById("admin__stats-row-title").hidden = false
+                    document.getElementById("admin__stats-row-title-two").hidden = false
                     document.getElementById("admin__stats-input-year").hidden = false
                     document.getElementById("admin__stats-input-year-two").hidden = false
                     document.getElementById("admin__stats-input-month").hidden = false
@@ -402,6 +605,8 @@ window.addEventListener('load', () => {
             }
         } else {
             comparation = "0";
+            document.getElementById("admin__stats-row-title").hidden = true
+            document.getElementById("admin__stats-row-title-two").hidden = true
             document.getElementById("admin__stats-input-year").hidden = true
             document.getElementById("admin__stats-input-year-two").hidden = true
             document.getElementById("admin__stats-input-month").hidden = true
@@ -495,27 +700,18 @@ window.addEventListener('load', () => {
             "day": dayTwo
         };
 
-        console.log(route);
-        console.log('datos 1: ', _datos);
-        console.log('datos 2: ', _datosTwo);
-        console.log(comparation)
         if (route !== "0" && inputRoute.value !== "product") {
             if (comparation === "no") {
                 doPost(route, _datos)
                 .then((data) => {
-                    console.log(data);
                     const escale = data.status[1].escale;
-                    console.log(escale)
                     const months = Object.keys(data.status[0])
-                    console.log(months)
                     let values = Object.values(data.status[0])
                     values = [
                         ...values,
                         escale
                     ]
         
-                    console.log(values)
-                    console.log(values.map((value, index) => value))
                     const ctx = document.getElementById('myChart').getContext('2d');
                     if (myChart) {
                         myChart.destroy();
@@ -618,10 +814,8 @@ window.addEventListener('load', () => {
                 });
             }
         } else if (inputRoute.value === "product") {
-            console.log("Entré a la ruta product")
             doGet(route)
             .then((data) => {
-                console.log(data);
 
                 const ctx = document.getElementById('myChart').getContext('2d');
                 if (myChart) {
@@ -633,7 +827,7 @@ window.addEventListener('load', () => {
                         labels: data.status.map((product) => product.name),
                         // labels: months.map((month) => month),
                         datasets: [{
-                            label: 'product',
+                            label: 'Clicks por producto',
                             // label: `${year}/${month}/${day}`,
                             data: data.status.map((product) => product.visualitions),
                             // data: values.map((value) => value),
