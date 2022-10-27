@@ -37,7 +37,6 @@ def admin ():
         data = request.get_json()
         if data['action']=='login':
             response = login(data,db)
-            print(response)
             if response != None:
                 return {'logged':True,'user':response[0]}
             else:
@@ -99,6 +98,7 @@ def estadistics_product():
         return {'status':context}
     elif request.method == 'POST':
         rq = request.get_json()
+        db.datainsert(db.querys({'action':'add_catalog_estadistics','id':rq['id']}))
         return {'status':'ok'}
 
 #Api catalog

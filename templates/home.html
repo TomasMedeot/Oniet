@@ -13,7 +13,7 @@
 <body>
     <header>
         <div id="home__header">
-            <img id="home__logo" src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
+            <img id="home__logo" src="{{ url_for('static', filename='img/image.jpg') }}" alt="Logo">
         </div>
     </header>
     <main id="home__main">
@@ -43,7 +43,7 @@
         }
 
         const viewDetailProduct = (id) => {
-            doPost("http://localhost:5000/api/product/estadistics", {
+            doPost("http://192.168.2.251/api/product/estadistics", {
                 "id": id
             })
             .then((data) => {
