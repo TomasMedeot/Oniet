@@ -21,10 +21,10 @@ window.addEventListener('load', () => {
             li.className = "list-group-item";
             li.innerHTML = `
             <div class="row">
-                <div class="col-10">
+                <div class="col-12 col-sm-6 col-md-7 col-lg-8">
                     ${product.name} $${product.price}
                 </div>
-                <div class="col-2">
+                <div class="home__catalog-btn-detail col-12 col-sm-6 col-md-3 col-lg-4">
                     <button type="button" onclick="viewDetailProduct(${product.id})" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#formModalDetail${product.id}">Ver detalle</button>
                     <!-- Update Form -->
                     <div class="modal fade" id="formModalDetail${product.id}" tabindex="-1" aria-labelledby="formModalLabelDetail" aria-hidden="true">
