@@ -1,3 +1,4 @@
+import ast
 from flask import *
 from flask_cors import *
 from database.database import *
@@ -61,14 +62,20 @@ def verif(mail,id):
 #Api activity
 @server.route('/api/add',methods=['POST','OPTIONS'])
 def actividty_add():
-    print('1' , request)
-    print('2' , request.get_data())
-    #print('3' , request.get_data()['email'])
-    '''rq = request.get_json()
-    rq['action']='add_activity'
-    context= db.datainsert(db.querys(rq))
-    return {'id':request.get_json(),'status':context}'''
-    return {'id':'a'}
+    try:
+        rq = request.get_json()
+        rq['action']='add_activity'
+        context= db.datainsert(db.querys(rq))
+        return {'id':request.get_json(),'status':context}
+    except:
+        try:
+            rq = ast.literal_eval(request.get_data().decode('utf-8'))
+            rq['action']='add_activity'
+            context= db.datainsert(db.querys(rq))
+            return {'id':ast.literal_eval(request.get_data().decode('utf-8')),'status':context}
+        except:
+            pass
+    return {'status':'error'}
 
 #Api general stadistics
 @server.route('/api/general/estadistics',methods=['POST'])
